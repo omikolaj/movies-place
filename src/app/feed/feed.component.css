@@ -1,0 +1,9 @@
+.container
+{
+    display: grid;
+}
+
+.container main{
+    margin: 2em auto;   
+    width: 50%; 
+}

@@ -1,0 +1,24 @@
+<nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+        <fa-icon [icon]="faBars"
+        (click)="onMobileMenuClick(); "></fa-icon>
+    </span>
+    <a href="#" class="logo">logo</a>
+    <ul class="main-nav" [ngClass]="{'active': navbarOpen}"  id="js-menu">
+        <li>
+            <a href="#" class="nav-links">Home</a>
+        </li>
+        <li>
+            <a href="#" class="nav-links">Products</a>
+        </li>
+        <li>
+            <a href="#" class="nav-links">About Us</a>
+        </li>
+        <li>
+            <a href="#" class="nav-links">Contact Us</a>
+        </li>
+        <li>
+            <a href="#" class="nav-links">Blog</a>
+        </li>
+    </ul>
+</nav>
