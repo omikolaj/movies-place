@@ -1,4 +1,17 @@
-<nav class="navbar">
+<mat-sidenav-container>
+        <mat-sidenav #sidenav role="navigation">
+              <!--this is a place for us to add side-nav code-->
+              <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <!--in here all the content must reside. We will add a navigation header as well-->
+            <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+        <main>
+            <!-- <router-outlet></router-outlet> -->
+        </main>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+<!-- <nav class="navbar">        
     <span class="navbar-toggle" id="js-navbar-toggle">
         <fa-icon [icon]="faBars"
         (click)="onMobileMenuClick(); "></fa-icon>
@@ -20,5 +33,5 @@
         <li>
             <a href="#" class="nav-links">Blog</a>
         </li>
-    </ul>
-</nav>
+    </ul>  
+</nav> -->
