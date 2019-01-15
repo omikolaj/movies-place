@@ -5,7 +5,7 @@
             </button>
         </div>
         <!-- <div> -->
-            <a routerLink="/home" class="logo">
+            <a routerLink="/home" class="nav-button">
                 <span>
                     <img class="img-responsive" src="../../../assets/images/directors_chair.png" alt="Directors Chair Logo">
                     <span>Movies Place</span>
@@ -16,16 +16,25 @@
         <div>
             <ul class="main-nav" [ngClass]="{'active': navbarOpen}"  id="js-menu">
                 <li>
-                    <a class="nav-links" routerLink="/owner">Home</a>
+                    <a class="nav-links nav-button" routerLink="/owner">Home
+                        <div class="mat-button-focus-overlay"></div>  
+                    </a>
+                                  
                 </li>
                 <li>
-                    <a class="nav-links" routerLink="/account">Movies</a>
+                    <a class="nav-links nav-button" routerLink="/account">Movies
+                        <div class="mat-button-focus-overlay"></div>
+                    </a>                                    
                 </li>
                 <li>
-                    <a class="nav-links" routerLink="/account">Account</a>
+                    <a class="nav-links nav-button" routerLink="/account">Account
+                        <div class="mat-button-focus-overlay"></div>
+                    </a>                    
                 </li>
                 <li>
-                    <a class="nav-links" routerLink="/account">Chat</a>
+                    <a class="nav-links nav-button" routerLink="/account">Chat
+                        <div class="mat-button-focus-overlay"></div>                
+                    </a>                    
                 </li>
             </ul>
         </div>
