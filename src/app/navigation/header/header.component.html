@@ -1,0 +1,32 @@
+<mat-toolbar class="navbar" color="primary">
+        <div class="navbar-toggle" id="js-navbar-toggle">
+            <button mat-icon-button (click)="onToggleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+        <!-- <div> -->
+            <a routerLink="/home" class="logo">
+                <span>
+                    <img class="img-responsive" src="../../../assets/images/directors_chair.png" alt="Directors Chair Logo">
+                    <span>Movies Place</span>
+                </span>                
+                <div class="mat-button-focus-overlay"></div>                
+            </a>
+        <!-- </div> -->
+        <div>
+            <ul class="main-nav" [ngClass]="{'active': navbarOpen}"  id="js-menu">
+                <li>
+                    <a class="nav-links" routerLink="/owner">Home</a>
+                </li>
+                <li>
+                    <a class="nav-links" routerLink="/account">Movies</a>
+                </li>
+                <li>
+                    <a class="nav-links" routerLink="/account">Account</a>
+                </li>
+                <li>
+                    <a class="nav-links" routerLink="/account">Chat</a>
+                </li>
+            </ul>
+        </div>
+</mat-toolbar>
