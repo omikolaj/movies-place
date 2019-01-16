@@ -37,9 +37,18 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  RippleGlobalOptions,
+  MAT_RIPPLE_GLOBAL_OPTIONS,
 } from '@angular/material';
 
+const globalRippleConfig: RippleGlobalOptions = {
+  terminateOnPointerUp: false
+}
+
 @NgModule({
+  providers: [
+    {provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: globalRippleConfig}
+  ],
   declarations: [],
   imports: [
     CommonModule,

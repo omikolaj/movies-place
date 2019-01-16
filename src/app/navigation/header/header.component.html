@@ -5,33 +5,73 @@
             </button>
         </div>
         <!-- <div> -->
-            <a routerLink="/home" class="nav-button logo">
+            <a routerLink="/home" class="nav-button logo" #logo>
                 <span>
                     <img class="img-responsive" src="../../../assets/images/logo.png" alt="Directors Chair Logo">
                     <span>Movies Place</span>
                 </span>                
+                <div class="ripple" 
+                    matRipple 
+                    [matRippleTrigger]="logo" 
+                    [matRippleCentered]="centered"
+                    [matRippleDisabled]="disabled"
+                    [matRippleUnbounded]="unbounded"
+                    [matRippleRadius]="radius"
+                    [matRippleColor]="color"></div>
                 <div class="mat-button-focus-overlay"></div>                
             </a>
         <!-- </div> -->
         <div>
             <ul class="main-nav" [ngClass]="{'active': navbarOpen}"  id="js-menu">
                 <li>
-                    <a class="nav-links nav-button" routerLink="/owner">Home
-                        <div class="mat-button-focus-overlay"></div>  
+                    <a class="nav-links nav-button" routerLink="/owner" #home>Home
+                    <div class="ripple" 
+                    matRipple 
+                    [matRippleTrigger]="home" 
+                    [matRippleCentered]="centered"
+                    [matRippleDisabled]="disabled"
+                    [matRippleUnbounded]="unbounded"
+                    [matRippleRadius]="radius"
+                    [matRippleColor]="color"></div>  
+                    <div class="mat-button-focus-overlay"></div>
                     </a>          
                 </li>
                 <li>
-                    <a class="nav-links nav-button" routerLink="/account">Movies
+                    <a class="nav-links nav-button" routerLink="/account" #movies>Movies
+                        <div class="ripple" 
+                        matRipple 
+                        [matRippleTrigger]="movies" 
+                        [matRippleCentered]="centered"
+                        [matRippleDisabled]="disabled"
+                        [matRippleUnbounded]="unbounded"
+                        [matRippleRadius]="radius"
+                        [matRippleColor]="color"></div>
                         <div class="mat-button-focus-overlay"></div>
                     </a>                                    
                 </li>
                 <li>
-                    <a class="nav-links nav-button" routerLink="/account">Account
+                    <a class="nav-links nav-button" routerLink="/account" #account>Account
+                        <div class="ripple" 
+                        matRipple 
+                        [matRippleTrigger]="account" 
+                        [matRippleCentered]="centered"
+                        [matRippleDisabled]="disabled"
+                        [matRippleUnbounded]="unbounded"
+                        [matRippleRadius]="radius"
+                        [matRippleColor]="color"></div>
                         <div class="mat-button-focus-overlay"></div>
                     </a>                    
                 </li>
                 <li>
-                    <a class="nav-links nav-button" routerLink="/account">Chat
+                    <a class="nav-links nav-button" routerLink="/account" #chat>Chat
+                        <div class="ripple" 
+                        matRipple 
+                        [matRippleTrigger]="chat" 
+                        [matRippleCentered]="centered"
+                        [matRippleDisabled]="disabled"
+                        [matRippleUnbounded]="unbounded"
+                        [matRippleRadius]="radius"
+                        [matRippleColor]="color"></div>
                         <div class="mat-button-focus-overlay"></div>                
                     </a>                    
                 </li>
