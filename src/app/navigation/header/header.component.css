@@ -116,8 +116,7 @@
     .navbar {
         display: flex;
         padding-bottom: 0;
-        align-items: center;
-    }
+        align-items: center;    }
 
     a span:nth-child(2){
         vertical-align: middle;
@@ -147,8 +146,9 @@
     .nav-links:hover {
         color:  rgba(255,255,255,0.8);
     }
-    .test{
-        position: relative;
-        right: 0px;
+    .repo{        
+        position: absolute;
+        right:0;
+        margin-right: 16px;
     }
 }
