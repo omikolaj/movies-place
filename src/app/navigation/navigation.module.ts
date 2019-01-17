@@ -6,6 +6,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
+import { RepoPickerComponent } from './repo-picker/repo-picker.component';
 
 library.add(faBars);
 
@@ -13,7 +14,8 @@ library.add(faBars);
   declarations: [
     HeaderComponent,
     SidenavListComponent,
-    HeaderComponent 
+    HeaderComponent,
+    RepoPickerComponent 
   ],
   imports: [
     CommonModule, 
@@ -25,7 +27,8 @@ library.add(faBars);
     FontAwesomeModule,
     SidenavListComponent,
     HeaderComponent,
-    AngularMaterialModule
+    AngularMaterialModule,
+    RepoPickerComponent
   ]
 })
 export class NavigationModule { }
