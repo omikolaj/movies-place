@@ -1,7 +1,18 @@
+<ng-template #githubButtons>
+    <button mat-menu-item>
+        <mat-icon>flip_to_front</mat-icon>
+        <span>Client Side</span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>flip_to_back</mat-icon>
+        <span>Server Side</span>
+    </button>
+</ng-template>
+
 <app-layout>
     <mat-sidenav-container>
         <mat-sidenav #sidenav role="navigation">
-            <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+            <app-sidenav-list [githubButtons]="githubButtons" (sidenavClose)="sidenav.close()"></app-sidenav-list>
         </mat-sidenav>
         <mat-sidenav-content>
             <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
@@ -12,3 +23,4 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
 </app-layout>
+

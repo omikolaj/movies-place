@@ -17,7 +17,8 @@
         <a matline>GitHub</a>
     </mat-list-item>
     <mat-menu #menu="matMenu" overlapTrigger="false">
-        <button mat-menu-item (click)="onSidenavClose()">View profile</button>
-        <button mat-menu-item (click)="onSidenavClose()">Add contact</button>
+        <ng-container 
+            *ngTemplateOutlet="githubButtons">
+        </ng-container>
     </mat-menu>
 </mat-nav-list>
