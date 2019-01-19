@@ -1,21 +1,14 @@
-<button mat-button class="repo-picker" #github [matMenuTriggerFor]="dropDown">
-    <img class="img-responsive" src="../../../assets/images/github_icon.png" alt="">
-    <span>
-        GitHub
-      </span>
-      <mat-icon class="mat-icon mat-icons">arrow_drop_down</mat-icon>
-      <div class="ripple" matRipple [matRippleTrigger]="github" [matRippleCentered]="centered" [matRippleDisabled]="disabled"
-        [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color"></div>
-      <div class="mat-button-focus-overlay"></div>
+<button mat-menu-item>
+  <a href="http://github.com/omikolaj/movies-place" target="_blank">
+    <mat-icon>flip_to_front</mat-icon>
+    <span>Client Side</span>
+  </a>
 </button>
-<mat-menu #dropDown="matMenu" overlapTrigger="false">
-    <button mat-menu-item>
-      <mat-icon>flip_to_front</mat-icon>
-      <span>Client Side</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>flip_to_back</mat-icon>
-      <span>Server Side</span>
-    </button>
-  </mat-menu>
+<button mat-menu-item>
+  <a href="" target="_blank">
+    <mat-icon>flip_to_back</mat-icon>
+    <span>Server Side</span>
+  </a>
+</button>
+
 

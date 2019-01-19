@@ -7,6 +7,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 import { RepoPickerComponent } from './repo-picker/repo-picker.component';
+import { GithubButtonComponent } from './repo-picker/github-button/github-button.component';
 
 library.add(faBars);
 
@@ -15,7 +16,8 @@ library.add(faBars);
     HeaderComponent,
     SidenavListComponent,
     HeaderComponent,
-    RepoPickerComponent 
+    RepoPickerComponent,
+    GithubButtonComponent 
   ],
   imports: [
     CommonModule, 

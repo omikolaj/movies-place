@@ -75,13 +75,14 @@
                         <div class="mat-button-focus-overlay"></div>                
                     </a>                    
                 </li>
-            </ul>
-                    <!-- <a href="">
-                        <span>
-                            <img src="../../../assets/images/github_icon.png" alt="">
-                            <span>GitHub</span>
-                        </span>                        
-                    </a> -->                
+            </ul>                
         </div>
-            <app-repo-picker class="repo"></app-repo-picker>        
+        <div class="repo">
+            <button mat-button class="repo-picker" [matMenuTriggerFor]="dropDown">
+                <app-github-button></app-github-button>
+            </button>
+            <mat-menu #dropDown="matMenu" overlapTrigger="false">
+                <app-repo-picker></app-repo-picker>
+            </mat-menu>
+        </div>
 </mat-toolbar>

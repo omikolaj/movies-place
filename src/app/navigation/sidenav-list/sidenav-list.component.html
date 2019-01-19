@@ -12,13 +12,9 @@
         <mat-icon>account_balance</mat-icon><span class="nav-caption">Chat</span>
     </a>
     <mat-list-item [matMenuTriggerFor]="menu">
-        <!-- <mat-icon>unfold_more</mat-icon> -->
-        <img class="img-responsive" src="../../../assets/images/github_icon_black.png" alt="">
-        <a matline>GitHub</a>
+        <app-github-button gitHubLogo="github_icon_black"></app-github-button>
     </mat-list-item>
     <mat-menu #menu="matMenu" overlapTrigger="false">
-        <ng-container 
-            *ngTemplateOutlet="githubButtons">
-        </ng-container>
+        <app-repo-picker></app-repo-picker>
     </mat-menu>
 </mat-nav-list>

@@ -1,74 +1,7 @@
-.img-responsive{
-    height: 26px;
-    margin: 0 4px 3px 0;
-    vertical-align: middle;
-}
-.nav-button{
-    box-sizing: border-box;
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    outline: 0;
-    border: none;
-    -webkit-tap-highlight-color: transparent;
-    display: inline-block;
-    white-space: nowrap;
+button a
+{
     text-decoration: none;
-    vertical-align: baseline;
-    text-align: center;
-    margin: 0;
-    min-width: 64px;
-    line-height: 36px;
-    padding: 0 16px;
-    border-radius: 4px;
-    overflow: visible;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 36px;
 }
-
-.mat-button-focus-overlay{
-    background: #000;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    pointer-events: none;
-    border-radius: 4px;
-    transition: opacity .2s cubic-bezier(.35,0,.25,1),background-color .2s cubic-bezier(.35,0,.25,1);
-    opacity: 0;
-}
-
-.nav-button:hover .mat-button-focus-overlay,
-.nav-links:hover .mat-button-focus-overlay{
-    opacity: 0.04;
-}
-
-.ripple{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    border-radius: 4px;
-}
-
-.mat-icon{
-    vertical-align: middle;
-}
-
-.repo-picker{
-    display: none;
-}
-
-@media screen and (min-width: 768px){
-    .repo-picker{
-        display: inline-block;
-    }
+a:visited{
+    color: inherit;
 }

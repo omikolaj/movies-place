@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-repo-picker',
@@ -10,6 +10,7 @@ export class RepoPickerComponent implements OnInit {
   disabled: boolean = false;
   unbounded: boolean = false; 
   color: string = "#ffffff29";
+  @Input() dropDown:any;
   constructor() { }
 
   ngOnInit() {
