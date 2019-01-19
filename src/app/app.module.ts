@@ -6,14 +6,14 @@ import { FeedComponent } from './views/home/components/feed/feed.component';
 import { ArticleListModule } from './views/home/components/articles/article-list/article-list.module';
 import { LayoutComponent } from './hoc/layout/layout.component'
 import { NavigationModule } from './components/navigation/navigation.module';
-import { HomeComponent } from './views/home/home.component';
+import { HomeView } from './views/home/home.view';
 
 @NgModule({
   declarations: [
     AppComponent,
     FeedComponent,
     LayoutComponent,
-    HomeComponent   
+    HomeView   
   ],
   imports: [
     BrowserModule,
