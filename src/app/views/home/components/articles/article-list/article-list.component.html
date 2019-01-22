@@ -1,5 +1,8 @@
 <section>
-    <app-article-item *ngFor="let article of articles"
-    [article]="article"
-    ></app-article-item>
+    <app-article-item 
+        class="list-item" 
+        *ngFor="let article of articles; index as i" 
+        [article]="article"
+        [index]="i">
+    </app-article-item>
 </section>

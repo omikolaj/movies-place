@@ -28,4 +28,8 @@ export class ArticleService {
   {
       return this.articles.slice();
   }
+
+  getArticle(id: number){
+    return this.articles.filter((article, index) => id === index);
+  }
 }

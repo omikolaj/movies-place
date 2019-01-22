@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Article } from 'src/app/models/article.model';
+import { HomeService } from 'src/app/services/home/home.service';
 
 @Component({
   selector: 'app-article-item',
@@ -7,10 +8,15 @@ import { Article } from 'src/app/models/article.model';
   styleUrls: ['./article-item.component.css']
 })
 export class ArticleItemComponent implements OnInit {
-  @Input() public article: Article;  
-  constructor() { }
+  @Input() public article: Article;
+  @Input() public index: number;  
+  constructor(private homeViewService: HomeService) { }
 
   ngOnInit() {
+  }
+
+  onMovieClicked(id: number){
+    this.homeViewService.movieSelected.emit(id);
   }
 
 }
