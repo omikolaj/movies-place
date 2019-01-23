@@ -11,6 +11,9 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { ArticleState } from './store/state/article.state';
+import { HttpClientModule } from '@angular/common/http';
+import { ArticleService } from './services/article/article.service';
+import { HomeService } from './services/home/home.service';
 
 @NgModule({
   declarations: [
@@ -28,9 +31,10 @@ import { ArticleState } from './store/state/article.state';
       ArticleState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
-    NgxsLoggerPluginModule.forRoot()
+    NgxsLoggerPluginModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ArticleService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

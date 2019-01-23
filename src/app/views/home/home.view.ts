@@ -3,14 +3,16 @@ import { ArticleService } from 'src/app/services/article/article.service';
 import { Article } from 'src/app/models/article.model';
 import { HomeService } from 'src/app/services/home/home.service';
 import { Store } from '@ngxs/store';
+import { FetchArticles } from '../../store/actions/home.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.view.html',
-  styleUrls: ['./home.view.css']
+  styleUrls: ['./home.view.css'],
+  providers: [ArticleService]
 })
 export class HomeView implements OnInit {
-  private articles: Article[];
   constructor(
     private articleService: ArticleService, 
     private homeViewService: HomeService,
@@ -18,15 +20,15 @@ export class HomeView implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getArticles();
+    this.fetchArticles();
     this.homeViewService.movieSelected.subscribe((id) => 
     console.log(`Event trigger from Home ${id}`)
       //(id: number) => this.articleService.getArticle(id)
     )
   }
 
-  getArticles(): void{
-    this.articles = this.articleService.getArticles();    
+  fetchArticles(): void{
+    this.store.dispatch(new FetchArticles());        
   }
 
 }

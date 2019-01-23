@@ -1,19 +1,23 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Article } from './../../models/article.model';
-import { AddArticle, RemoveArticle } from './../actions/home.actions'
+import { AddArticle, RemoveArticle, FetchArticles } from './../actions/home.actions'
+import { ArticleService } from 'src/app/services/article/article.service';
+import { tap } from 'rxjs/operators';
 
-export class ArticleStateModel {
+export interface ArticleStateModel {
     articles: Article[];
 }
 
 @State<ArticleStateModel>({
-    name: 'articlesName',
+    name: 'articles',
     defaults: {
         articles: []
     }
 })
 
-export class ArticleState{
+export class ArticleState{    
+    constructor(private articleService: ArticleService) {}
+
     @Selector()
     static getArticles(state: ArticleStateModel){
         return state.articles;
@@ -28,9 +32,25 @@ export class ArticleState{
     }
 
     @Action(RemoveArticle)
-    remove({getState, patchState }: StateContext<ArticleStateModel>, { payload }:RemoveArticle) {
+    remove({getState, patchState}: StateContext<ArticleStateModel>, { payload }: RemoveArticle) {
         patchState({
             articles: getState().articles.filter(a => a.title !== payload.title)
         })
+    }
+
+    @Action(FetchArticles)
+    fetchAll({getState, patchState}: StateContext<ArticleStateModel>){
+        patchState({
+            articles: this.articleService.fetchArticles()
+        })
+        // return this.articleService.fetchArticles().pipe(tap((articlesResults) => {
+        //     const state = getState();
+        //         patchState({
+        //         ...state,
+        //         articles: [                    
+        //             ...articlesResults                    
+        //         ]
+        //     })
+        // }))        
     }
 }

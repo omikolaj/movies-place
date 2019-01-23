@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Article } from 'src/app/models/article.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ArticleService {
     {
       id: 1,
       title: "This movie was OK",
-      content: "The plot of this movie did not catch my attention right away"
+      content: "The plot of this movie did not catch my attention right away",
     },
     {
       id: 2,
@@ -23,7 +24,7 @@ export class ArticleService {
       content: "Duis nec aliquam diam. Etiam ut feugiat risus."
     }
   ];
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getArticles()//: Observable<Article[]>
   {
@@ -32,5 +33,11 @@ export class ArticleService {
 
   getArticle(id: number){    
     return this.articles.filter((article, index) => id === index);
+  }
+
+  // Async Calls
+  fetchArticles(): Article[]{
+    return this.articles.slice();
+    //this.http.get<Article[]>('/articles');
   }
 }

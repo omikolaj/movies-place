@@ -7,10 +7,14 @@ import { Article } from 'src/app/models/article.model';
 })
 export class HomeService {
   movieSelected = new Subject();
-  
+  public articles: Article[];
   constructor() { }
 
   onMovieSelected(id: number){
+
+  }
+
+  fetchArticles(){
 
   }
 }

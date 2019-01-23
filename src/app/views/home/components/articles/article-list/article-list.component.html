@@ -1,7 +1,7 @@
 <section>
     <app-article-item 
         class="list-item" 
-        *ngFor="let article of articles; index as i" 
+        *ngFor="let article of articles$ | async; index as i" 
         [article]="article"
         [index]="i">
     </app-article-item>
