@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Article } from './../../models/article.model';
-import { AddArticle, RemoveArticle, FetchArticles } from './../actions/home.actions'
+import { AddArticle, RemoveArticle, FetchArticles, GetArticle } from '../actions/article.actions'
 import { ArticleService } from 'src/app/services/article/article.service';
 import { tap } from 'rxjs/operators';
 
@@ -52,5 +52,10 @@ export class ArticleState{
         //         ]
         //     })
         // }))        
+    }
+
+    @Action(RemoveArticle)
+    getArticle({getState, patchState}: StateContext<ArticleStateModel>, { payload }:GetArticle) {
+        console.log(getState().articles.filter(a => a.id === payload))
     }
 }

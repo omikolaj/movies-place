@@ -3,7 +3,7 @@ import { ArticleService } from 'src/app/services/article/article.service';
 import { Article } from 'src/app/models/article.model';
 import { HomeService } from 'src/app/services/home/home.service';
 import { Store } from '@ngxs/store';
-import { FetchArticles } from '../../store/actions/home.actions';
+import { FetchArticles } from '../../store/actions/article.actions';
 import { Observable } from 'rxjs';
 import { ArticlesFacadeService } from 'src/app/facades/articles-facade/articles-facade.service';
 

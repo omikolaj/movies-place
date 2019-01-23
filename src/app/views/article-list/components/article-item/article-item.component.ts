@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home/home.service';
 export class ArticleItemComponent implements OnInit {
   @Input() public article: Article;
   @Input() public index: number;  
-  constructor(private homeViewService: HomeService) { }
+  constructor() { }
 
   ngOnInit() {
   }

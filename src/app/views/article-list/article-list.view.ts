@@ -4,6 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ArticleService } from 'src/app/services/article/article.service';
 import { store } from '@angular/core/src/render3';
+import { ArticlesFacadeService } from 'src/app/facades/articles-facade/articles-facade.service';
 
 @Component({
   selector: 'app-article-list',
@@ -12,13 +13,9 @@ import { store } from '@angular/core/src/render3';
 })
 export class ArticleListView implements OnInit {
   @Select(state => state.articles.articles)articles$: Observable<Article[]>
-  constructor(private store: Store) {    
+  constructor(public articlesFacade: ArticlesFacadeService) {    
   }
 
   ngOnInit() {
-  }
-
-  onMovieClicked(id: number){
-    console.log(id);
   }
 }

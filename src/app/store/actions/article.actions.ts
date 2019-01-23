@@ -1,4 +1,4 @@
-import { Article } from './../../models/article.model';
+import { Article } from '../../models/article.model';
 
 export class AddArticle {
     static readonly type = '[ARTICLE] Add';
@@ -13,4 +13,9 @@ export class RemoveArticle{
 export class FetchArticles{
     static readonly type = '[ARTICLE] FetchArticles'
     constructor() { }
+}
+
+export class GetArticle{
+    static readonly type = '[ARTICLE] GetArticle'
+    constructor(public payload: number) { }
 }
