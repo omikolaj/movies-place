@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleService } from 'src/app/services/article/article.service';
 import { Article } from 'src/app/models/article.model';
 import { HomeService } from 'src/app/services/home/home.service';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,11 @@ import { HomeService } from 'src/app/services/home/home.service';
 })
 export class HomeView implements OnInit {
   private articles: Article[];
-  constructor(private articleService: ArticleService, 
-    private homeViewService: HomeService) { }
+  constructor(
+    private articleService: ArticleService, 
+    private homeViewService: HomeService,
+    private store: Store
+    ) { }
 
   ngOnInit() {
     this.getArticles();
@@ -22,7 +26,7 @@ export class HomeView implements OnInit {
   }
 
   getArticles(): void{
-    this.articles = this.articleService.getArticles();
+    this.articles = this.articleService.getArticles();    
   }
 
 }

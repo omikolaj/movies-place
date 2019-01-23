@@ -16,7 +16,7 @@ export class ArticleItemComponent implements OnInit {
   }
 
   onMovieClicked(id: number){
-    this.homeViewService.movieSelected.emit(id);
+    this.homeViewService.movieSelected.next(id);
   }
 
 }

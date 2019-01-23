@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from 'src/app/models/article.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class ArticleService {
       return this.articles.slice();
   }
 
-  getArticle(id: number){
+  getArticle(id: number){    
     return this.articles.filter((article, index) => id === index);
   }
 }

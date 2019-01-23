@@ -7,8 +7,10 @@ import { LayoutComponent } from './hoc/layout/layout.component'
 import { NavigationModule } from './components/navigation/navigation.module';
 import { HomeModule } from './views/home/home.module';
 import { SharedModule } from './shared/shared.module';
-
-
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { ArticleState } from './store/state/article.state';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,12 @@ import { SharedModule } from './shared/shared.module';
     ArticleListModule,
     NavigationModule,
     HomeModule,
-    SharedModule
+    SharedModule,
+    NgxsModule.forRoot([
+      ArticleState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
