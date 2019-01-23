@@ -3,8 +3,7 @@
     <mat-card-title>{{index + 1}}. {{article.title}}</mat-card-title>
     <mat-card-subtitle>Top 10 Movies</mat-card-subtitle>
   </mat-card-header>
-  <img class="movie-card-image"   src="../../../../../../../assets/images/movie_img_placeholder.jpg" alt="Movie Placeholder Image"
-  (click)="onMovieClicked(index)">
+  <ng-content></ng-content>
   <mat-card-content>
       <h3>{{ article.title }}</h3>
       <span>{{ article.content }}</span>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { HomeView } from './home.view';
 import { FeedComponent } from './components/feed/feed.component';
-import { ArticleListModule } from './components/articles/article-list/article-list.module';
+import { ArticleListModule } from '../article-list/article-list.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,6 @@ import { ArticleListModule } from './components/articles/article-list/article-li
     CommonModule,
     AngularMaterialModule,
     ArticleListModule,
-    ArticleListModule
   ],
   exports: [
     HomeView,

@@ -5,16 +5,8 @@ import { Article } from 'src/app/models/article.model';
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
-  movieSelected = new Subject();
-  public articles: Article[];
+export class HomeService {    
   constructor() { }
 
-  onMovieSelected(id: number){
 
-  }
-
-  fetchArticles(){
-
-  }
 }

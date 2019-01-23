@@ -15,8 +15,6 @@ export class ArticleItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  onMovieClicked(id: number){
-    this.homeViewService.movieSelected.next(id);
-  }
+  
 
 }

@@ -5,6 +5,7 @@ import { HomeService } from 'src/app/services/home/home.service';
 import { Store } from '@ngxs/store';
 import { FetchArticles } from '../../store/actions/home.actions';
 import { Observable } from 'rxjs';
+import { ArticlesFacadeService } from 'src/app/facades/articles-facade/articles-facade.service';
 
 @Component({
   selector: 'app-home',
@@ -14,21 +15,20 @@ import { Observable } from 'rxjs';
 })
 export class HomeView implements OnInit {
   constructor(
-    private articleService: ArticleService, 
-    private homeViewService: HomeService,
-    private store: Store
-    ) { }
+    private store: Store,
+    private articleFacade: ArticlesFacadeService
+    ) {
+      this.articleFacade.loadArticles();
+     }
 
   ngOnInit() {
-    this.fetchArticles();
-    this.homeViewService.movieSelected.subscribe((id) => 
-    console.log(`Event trigger from Home ${id}`)
+    //this.fetchArticles();
+    
       //(id: number) => this.articleService.getArticle(id)
-    )
   }
 
-  fetchArticles(): void{
-    this.store.dispatch(new FetchArticles());        
-  }
+  // fetchArticles(): void{
+  //   this.store.dispatch(new FetchArticles());        
+  // }
 
 }
