@@ -11,8 +11,9 @@ import { ArticlesFacadeService } from 'src/app/facades/articles-facade/articles-
   templateUrl: './article-list.view.html',
   styleUrls: ['./article-list.view.css']
 })
-export class ArticleListView implements OnInit {
-  @Select(state => state.articles.articles)articles$: Observable<Article[]>
+export class ArticleListView implements OnInit {  
+  public articles$: Observable<Article[]> = this.articlesFacade.articles$;
+  
   constructor(public articlesFacade: ArticlesFacadeService) {    
   }
 

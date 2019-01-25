@@ -4,4 +4,13 @@
     box-sizing: border-box;
 }
 
+mat-card-title h1{
+    padding: 1rem 1rem .5rem 0rem;
+}
+
+mat-card-content p,
+mat-card-content h3{
+    padding: .5rem 1rem .5rem 1rem;
+}
+
 
