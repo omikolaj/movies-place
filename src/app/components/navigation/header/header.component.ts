@@ -10,15 +10,16 @@ export class HeaderComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
   centered: boolean = false;
   disabled: boolean = false;
-  unbounded: boolean = false; 
+  unbounded: boolean = false;
   color: string = "#ffffff29";
+  
   constructor(
     private route: ActivatedRoute,
-    ) { }
- 
+  ) { }
+
   ngOnInit() {
   }
- 
+
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
   }

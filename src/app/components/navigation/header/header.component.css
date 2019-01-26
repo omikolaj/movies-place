@@ -72,9 +72,10 @@
 }
 
 .active-route{
-    color: rgba(255, 255, 255, 1);
     background: #ffffff2b
 }
+
+
 
 .img-responsive{
     height: 26px;
@@ -128,6 +129,7 @@
 
     a span:nth-child(2){
         vertical-align: middle;
+        color: rgba(255, 255, 255, 1);
     }
 
     .main-nav{
