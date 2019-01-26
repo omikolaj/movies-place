@@ -21,7 +21,8 @@ import { HomeRoutingModule } from './home-routing.routing';
     HomeView,
     FeedComponent,
     ArticleListModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }

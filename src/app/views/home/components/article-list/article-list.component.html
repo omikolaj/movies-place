@@ -4,7 +4,8 @@
         *ngFor="let article of articlesFacade.articles$ | async; index as i" 
         [article]="article"
         [index]="i">
-        <img class="movie-card-image" src="../../../../../../../assets/images/movie_img_placeholder.jpg" alt="Movie Placeholder Image"
+        <img [routerLink]="['movies', i]" class="movie-card-image" src="../../../../../../../assets/images/movie_img_placeholder.jpg" alt="Movie Placeholder Image"
         (click)="moviesFacade.fetchMovieDetails(i);">
     </app-article-item>
 </section>
+ 

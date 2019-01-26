@@ -14,21 +14,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { ArticleService } from './services/article/article.service';
 import { HomeService } from './services/home/home.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MovieState } from './store/state/movie.state';
+import { MoviesModule } from './views/movies/movies.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    PageNotFoundComponent,  
+    PageNotFoundComponent,    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,        
     NavigationModule,
     HomeModule,
+    MoviesModule,
     SharedModule,
     NgxsModule.forRoot([
-      ArticleState
+      ArticleState,
+      MovieState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
     NgxsLoggerPluginModule.forRoot(),

@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 import { RepoPickerComponent } from './repo-picker/repo-picker.component';
 import { GithubButtonComponent } from './repo-picker/github-button/github-button.component';
+import { RouterModule } from '@angular/router';
 
 library.add(faBars);
 
@@ -22,7 +23,8 @@ library.add(faBars);
   imports: [
     CommonModule, 
     FontAwesomeModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
