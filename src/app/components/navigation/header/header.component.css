@@ -71,6 +71,11 @@
     display: block;
 }
 
+.active-route{
+    color: rgba(255, 255, 255, 1);
+    background: #ffffff2b
+}
+
 .img-responsive{
     height: 26px;
     margin: 0 4px 3px 0;

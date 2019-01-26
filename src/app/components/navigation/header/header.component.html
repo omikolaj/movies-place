@@ -5,7 +5,7 @@
             </button>
         </div>
         <!-- <div> -->
-            <a routerLink="movies" class="nav-button logo" #logo>
+            <a routerLink="" routerLinkActive="active-route" class="nav-button logo" #logo>
                 <span>
                     <img class="img-responsive" src="../../../assets/images/logo.png" alt="Directors Chair Logo">
                     <span>Movies Place</span>
@@ -24,7 +24,7 @@
         <div>
             <ul class="main-nav" [ngClass]="{'active': navbarOpen}"  id="js-menu">
                 <li>
-                    <a class="nav-links nav-button" routerLink="" #home>Home
+                    <a class="nav-links nav-button" routerLink="movies" routerLinkActive="active-route" #home>Movies
                     <div class="ripple" 
                     matRipple 
                     [matRippleTrigger]="home" 
@@ -50,7 +50,7 @@
                     </a>                    
                 </li>
                 <li>
-                    <a class="nav-links nav-button" routerLink="chat" #chat>Chat
+                    <a class="nav-links nav-button" routerLink="post" #chat>Post
                         <div class="ripple" 
                         matRipple 
                         [matRippleTrigger]="chat" 

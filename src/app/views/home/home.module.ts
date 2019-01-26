@@ -5,6 +5,7 @@ import { HomeView } from './home.view';
 import { FeedComponent } from './components/feed/feed.component';
 import { ArticleListModule } from '../home/components/article-list/article-list.module';
 import { HomeRoutingModule } from './home-routing.routing';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,13 @@ import { HomeRoutingModule } from './home-routing.routing';
     CommonModule,
     AngularMaterialModule,
     ArticleListModule,
-    HomeRoutingModule
+    RouterModule
   ],
   exports: [
     HomeView,
     FeedComponent,
     ArticleListModule,
     AngularMaterialModule,
-    HomeRoutingModule
   ]
 })
 export class HomeModule { }
