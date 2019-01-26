@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticleListView } from './article-list.view';
-import { ArticleItemComponent } from './components/article-item/article-item.component';
+import { ArticleListComponent } from './article-list.component';
+import { ArticleItemComponent } from './article-item/article-item.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
-    ArticleListView,
+    ArticleListComponent,
     ArticleItemComponent
   ],
   imports: [
@@ -14,7 +14,7 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
     AngularMaterialModule
   ],
   exports: [
-    ArticleListView,
+    ArticleListComponent,
     ArticleItemComponent,
     CommonModule
   ]

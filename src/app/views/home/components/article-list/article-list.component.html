@@ -1,10 +1,10 @@
 <section>
     <app-article-item 
         class="list-item" 
-        *ngFor="let article of articles$ | async; index as i" 
+        *ngFor="let article of articlesFacade.articles$ | async; index as i" 
         [article]="article"
         [index]="i">
         <img class="movie-card-image" src="../../../../../../../assets/images/movie_img_placeholder.jpg" alt="Movie Placeholder Image"
-        (click)="articlesFacade.loadArticleDetails(i);">
+        (click)="moviesFacade.fetchMovieDetails(i);">
     </app-article-item>
 </section>

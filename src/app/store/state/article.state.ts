@@ -53,9 +53,4 @@ export class ArticleState{
         //     })
         // }))        
     }
-
-    @Action(RemoveArticle)
-    getArticle({getState, patchState}: StateContext<ArticleStateModel>, { payload }:GetArticle) {
-        console.log(getState().articles.filter(a => a.id === payload))
-    }
 }

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArticleListModule } from './views/article-list/article-list.module';
 import { LayoutComponent } from './hoc/layout/layout.component'
 import { NavigationModule } from './components/navigation/navigation.module';
 import { HomeModule } from './views/home/home.module';
@@ -22,8 +21,7 @@ import { HomeService } from './services/home/home.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,    
-    ArticleListModule,
+    AppRoutingModule,        
     NavigationModule,
     HomeModule,
     SharedModule,

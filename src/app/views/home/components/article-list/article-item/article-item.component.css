@@ -1,6 +1,6 @@
 .article-item{    
     padding: 0px;
-    margin: 10px;
+    margin: 1.5rem 0 1.5rem 0;
     box-sizing: border-box;
 }
 
@@ -11,6 +11,11 @@ mat-card-title h1{
 mat-card-content p,
 mat-card-content h3{
     padding: .5rem 1rem .5rem 1rem;
+}
+
+.article-buttons button{
+    margin-left: 1rem;
+    margin-bottom: .5rem;
 }
 
 
