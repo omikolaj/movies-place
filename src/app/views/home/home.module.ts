@@ -4,7 +4,7 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
 import { HomeView } from './home.view';
 import { FeedComponent } from './components/feed/feed.component';
 import { ArticleListModule } from '../home/components/article-list/article-list.module';
-import { HomeRoutingModule } from './home-routing.module';
+import { HomeRoutingModule } from './home-routing.routing';
 
 @NgModule({
   declarations: [

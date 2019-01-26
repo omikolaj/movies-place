@@ -13,11 +13,13 @@ import { ArticleState } from './store/state/article.state';
 import { HttpClientModule } from '@angular/common/http';
 import { ArticleService } from './services/article/article.service';
 import { HomeService } from './services/home/home.service';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,  
+    LayoutComponent,
+    PageNotFoundComponent,  
   ],
   imports: [
     BrowserModule,

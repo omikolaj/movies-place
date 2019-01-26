@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ export class HeaderComponent implements OnInit {
   disabled: boolean = false;
   unbounded: boolean = false; 
   color: string = "#ffffff29";
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    ) { }
  
   ngOnInit() {
   }
