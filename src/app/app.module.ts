@@ -9,9 +9,9 @@ import { SharedModule } from './shared/shared.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { ArticleState } from './store/state/article.state';
+import { PostState } from './store/state/post.state';
 import { HttpClientModule } from '@angular/common/http';
-import { ArticleService } from './services/article/article.service';
+import { PostService } from './services/post/post.service';
 import { HomeService } from './services/home/home.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MovieState } from './store/state/movie.state';
@@ -31,14 +31,14 @@ import { MoviesModule } from './views/movies/movies.module';
     MoviesModule,
     SharedModule,
     NgxsModule.forRoot([
-      ArticleState,
+      PostState,
       MovieState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
     NgxsLoggerPluginModule.forRoot(),
     HttpClientModule
   ],
-  providers: [ArticleService, HomeService],
+  providers: [PostService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

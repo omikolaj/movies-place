@@ -1,7 +1,10 @@
+import { Post } from './post.model';
+import { Favorite } from './favorite.model';
+
 export interface Movie {
     id: number,
     title: string,
-    content: string,
-    authors: string[]
+    favorites: Favorite[],
+    posts: Post[]
 
 }

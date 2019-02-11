@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticleListComponent } from './article-list.component';
-import { ArticleItemComponent } from './article-item/article-item.component';
+import { PostListComponent } from './post-list.component';
+import { PostItemComponent } from './post-item/post-item.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    ArticleListComponent,
-    ArticleItemComponent
+    PostListComponent,
+    PostItemComponent
   ],
   imports: [
     CommonModule,
@@ -16,9 +16,9 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   exports: [
-    ArticleListComponent,
-    ArticleItemComponent,
+    PostListComponent,
+    PostItemComponent,
     CommonModule
   ]
 })
-export class ArticleListModule { }
+export class PostListModule { }

@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from 'src/app/services/article/article.service';
-import { Article } from 'src/app/models/article.model';
+import { PostService } from 'src/app/services/post/post.service';
+import { Post } from 'src/app/models/post.model';
 import { HomeService } from 'src/app/services/home/home.service';
 import { Store } from '@ngxs/store';
-import { FetchArticles } from '../../store/actions/article.actions';
+import { FetchPosts } from '../../store/actions/post.actions';
 import { Observable } from 'rxjs';
-import { ArticlesFacadeService } from 'src/app/facades/articles-facade/articles-facade.service';
+import { PostsFacadeService } from 'src/app/facades/posts-facade/posts-facade.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.view.html',
   styleUrls: ['./home.view.css'],
-  providers: [ArticleService]
+  providers: [PostService]
 })
 export class HomeView implements OnInit {
   constructor(
     private store: Store,
-    private articleFacade: ArticlesFacadeService
+    private articleFacade: PostsFacadeService
     ) {
-      this.articleFacade.loadArticles();
+      this.articleFacade.loadPosts();
      }
 
   ngOnInit() {

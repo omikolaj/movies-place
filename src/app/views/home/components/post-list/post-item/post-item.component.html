@@ -3,21 +3,21 @@
     <mat-card-title>
       <div>
           <h1>
-              {{index + 1}}. {{article.title}}
+              {{index + 1}}. {{post.title}}
           </h1>
       </div>      
     </mat-card-title>
     <mat-card-subtitle>
       <div>
-          Top 10 Movies
+          {{ post.movie.title }}
       </div>
     </mat-card-subtitle>
   </mat-card-header>
   <ng-content></ng-content>
   <mat-card-content>
     <div>
-        <h3>{{ article.title }}</h3>
-        <p>{{ article.content }}</p>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content }}</p>
     </div>      
   </mat-card-content>
   <mat-card-actions>

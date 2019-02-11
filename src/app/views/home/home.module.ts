@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { HomeView } from './home.view';
 import { FeedComponent } from './components/feed/feed.component';
-import { ArticleListModule } from '../home/components/article-list/article-list.module';
+import { PostListModule } from '../home/components/post-list/post-list.module';
 import { HomeRoutingModule } from './home-routing.routing';
 import { RouterModule } from '@angular/router';
 
@@ -15,13 +15,13 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    ArticleListModule,
+    PostListModule,
     RouterModule
   ],
   exports: [
     HomeView,
     FeedComponent,
-    ArticleListModule,
+    PostListModule,
     AngularMaterialModule,
   ]
 })

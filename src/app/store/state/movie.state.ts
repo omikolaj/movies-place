@@ -1,7 +1,4 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Article } from './../../models/article.model';
-import { AddArticle, RemoveArticle, FetchArticles, GetArticle } from '../actions/article.actions'
-import { ArticleService } from 'src/app/services/article/article.service';
 import { tap } from 'rxjs/operators';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
@@ -17,10 +14,10 @@ export interface MovieStateModel {
     defaults: {
         movies: [],
         movie: {
-            id: 1,
-            content: "",
+            id: 1,            
             title: "",
-            authors: []
+            favorites: [],
+            posts: []            
         }
     }
 })
