@@ -1,9 +1,10 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { PostService } from 'src/app/services/post/post.service';
-import { tap, switchMap, catchError, mergeMap, exhaustMap } from 'rxjs/operators';
+import { tap, switchMap, catchError, mergeMap, exhaustMap, retryWhen, delayWhen, delay, take, concatMap } from 'rxjs/operators';
 import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 import * as actions from '../actions/post.actions';
+import { timer, iif, throwError, of, SubscribableOrPromise } from 'rxjs';
 
 export interface PostStateModel {
     posts: Post[];
@@ -18,7 +19,7 @@ export interface PostStateModel {
         loading: false,
         error: {
           message: "",
-          exception: {}                   
+          error: ""                   
         },
     }
 })
@@ -46,60 +47,66 @@ export class PostState{
         })
     }
 
-    @Action(actions.FetchPostsStart)
-    fetchAllStart({getState, patchState}: StateContext<PostStateModel>){
-      const state = getState();
-      return patchState({
-        ...state,
-        posts: [
-          ...state.posts
-        ],
-        loading: true
-      });
-    };
+    // concatMap((e, i) => 
+    //                   iif(() => i > 1,
+    //                     throwError(e),
+    //                     of(e).pipe(delay(2000))
+    //                 ))
 
     @Action(actions.FetchPosts)
     fetchAll(ctx: StateContext<PostStateModel>){
       console.log("fetching all posts");
       ctx.patchState({...ctx.getState(), loading: true})
-        return this.postService.fetchPosts().pipe(tap((postsResults) => {
-            const state = ctx.getState();
-                ctx.patchState({
-                ...state,
-                posts: [                    
-                    ...postsResults                    
-                ],                
-            })
-        }),
-        switchMap(() => {
+        return this.postService.fetchPosts().pipe(
+        switchMap((postsRequest) => {
           // we are using switchMap in this case, because we want to subscribe to the current observable and unsubscribe from it if another request is coming in to get all posts
-          console.log("Inside of switchMap")
-          return ctx.dispatch(new actions.FetchPostsSuccess())
-        }),      
+          console.log("Inside of switchMap. Dispatching posts success")
+          return ctx.dispatch(new actions.FetchPostsSuccess(postsRequest))
+        }),
+        retryWhen(errors => {
+          return errors
+                  .pipe(
+                    delayWhen((error, i) => 
+                    {
+                      if(i != 3){
+                        console.log(`Sometheing went wrong connecting to the server. Retrying 3 times. Attempting: ${i + 1}...`);
+                      }
+                      return iif(() => i + 1 >= 4,
+                       throwError(error),
+                       timer(2000)
+                      )
+                    })                    
+                  );
+        }),
         catchError(err => 
         {
-          console.log("Inside of catchError")
-          return ctx.dispatch(new actions.FetchPostsFail(err))
-        }
-      ))
+          // Return user friendly error message
+          console.log("Displaying user friendly error message", err)
+          ctx.dispatch(new actions.FetchPostsFail(err))
+          return throwError(err);
+        }),
+        catchError(err => {
+          console.log("An error occured. Returning empty collection");
+          return of([]);
+        })
+        )
+        .subscribe(
+          res => console.log("HTTP response", res),
+          err => console.log("HTTP Error", err),
+          () => console.log('HTTP request completed')
+        )
     }
 
     @Action(actions.FetchPostsSuccess)
-    fetchAllSuccess({getState, patchState}: StateContext<PostStateModel>){
-      const state = getState();
-      return patchState({
+    fetchAllSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.FetchPostsSuccess) {
+      const state = ctx.getState();
+      ctx.patchState({
         ...state,
         posts: [
-          ...state.posts
+          ...payload
         ],
-        loading: false,
-        error: 
-        {
-          message: "",
-          exception: {}
-        }
-      });
-    };
+      })
+    }
 
     @Action(actions.FetchPostsFail)
     fetchAllFail({getState, patchState}: StateContext<PostStateModel>, { payload }: actions.FetchPostsFail){
@@ -113,7 +120,7 @@ export class PostState{
         error: 
         {
           message: payload.message,
-          exception: payload.exception
+          error: payload.error
         }
       });
     };

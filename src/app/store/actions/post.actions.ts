@@ -11,11 +11,6 @@ export class RemovePost{
     constructor(public payload: Post) {}
 }
 
-export class FetchPostsStart{
-  static readonly type = '[POST] FetchPostsStart'
-  constructor() { }
-}
-
 export class FetchPosts{
     static readonly type = '[POST] FetchPosts'
     constructor() { }
@@ -23,6 +18,7 @@ export class FetchPosts{
 
 export class FetchPostsSuccess{
   static readonly type = '[POST] FetchPostsSuccess';  
+  constructor(public payload: Post[]) { }
 }
 
 export class FetchPostsFail{
