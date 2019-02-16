@@ -18,13 +18,11 @@ export class HomeView implements OnInit {
     private store: Store,
     private articleFacade: PostsFacadeService
     ) {
-      this.articleFacade.loadPosts();
+      
      }
 
   ngOnInit() {
-    //this.fetchArticles();
-    
-      //(id: number) => this.articleService.getArticle(id)
+    this.articleFacade.loadPosts();
   }
 
   // fetchArticles(): void{

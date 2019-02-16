@@ -26,7 +26,7 @@ export class FetchPostsFail{
   constructor(public payload: RequestError ) {}
 }
 
-export class GetPost{
-    static readonly type = '[POST] GetPost'
+export class FetchPost{
+    static readonly type = '[POST] FetchPost'
     constructor(public payload: number) { }
 }

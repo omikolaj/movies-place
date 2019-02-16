@@ -16,12 +16,13 @@ import { HomeService } from './services/home/home.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MovieState } from './store/state/movie.state';
 import { MoviesModule } from './views/movies/movies.module';
+import { LoaderModule } from './components/loader/loader.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    PageNotFoundComponent,    
+    PageNotFoundComponent,   
   ],
   imports: [
     BrowserModule,

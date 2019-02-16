@@ -4,16 +4,18 @@ import { PostListComponent } from './post-list.component';
 import { PostItemComponent } from './post-item/post-item.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
+import { LoaderModule } from 'src/app/components/loader/loader.module';
 
 @NgModule({
   declarations: [
     PostListComponent,
-    PostItemComponent
+    PostItemComponent, 
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
-    RouterModule
+    RouterModule,
+    LoaderModule
   ],
   exports: [
     PostListComponent,
