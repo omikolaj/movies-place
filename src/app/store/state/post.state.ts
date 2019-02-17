@@ -21,7 +21,11 @@ export interface PostStateModel {
         posts: [],
         request: {
           loading: false,
-          error: null,
+          error: {
+            error: false,
+            message: "",
+            errorResponse: ""
+          }
         }
     }
 })
@@ -39,7 +43,6 @@ export class PostState{
         return state.request[type];
       })
     }
-    
 
     @Action(actions.AddPost)
     add({getState, patchState}: StateContext<PostStateModel>, { payload }: actions.AddPost){
@@ -76,44 +79,20 @@ export class PostState{
         }
       })
         return this.postService.fetchPosts().pipe(
-        switchMap((postsRequest) => {
-          // we are using switchMap in this case, because we want to subscribe to the current observable and unsubscribe from it if another request is coming in to get all posts
-          console.log("Inside of switchMap. Dispatching posts success")
-          return ctx.dispatch(new actions.FetchPostsSuccess(postsRequest))
-        }),
-        retryWhen(errors => {
-          return errors
-                  .pipe(
-                    delayWhen((error, i) => 
-                    {
-                      if(i != 3){
-                        console.log(`Sometheing went wrong connecting to the server. Retrying 3 times. Attempting: ${i + 1}...`);
-                      }
-                      return iif(() => i + 1 >= 4,
-                       throwError(error),
-                       timer(2000)
-                      )
-                    })                    
-                  );
-        }),
-        catchError(err => 
-        {
-          // Return user friendly error message
-          console.log("Displaying user friendly error message", err)
-          ctx.dispatch(new actions.FetchPostsFail(err))
-          return throwError(err);
-        }),
-        catchError(err => {
-          console.log("An error occured. Returning empty collection");
-          return of([]);
-        })
+          switchMap((postsRequest) => {
+            // we are using switchMap in this case, because we want to subscribe to the current observable and unsubscribe from it if another request is coming in to get all posts
+            console.log("Inside of switchMap. Dispatching posts success")
+            return ctx.dispatch(new actions.FetchPostsSuccess(postsRequest))}),
+          catchError((error) => {
+            ctx.dispatch(new actions.FetchPostsFail(error));
+            return of([]);
+          }))
+          .subscribe(
+            res => console.log("HTTP response", res),
+            err => console.log("HTTP Error", err),
+            () => console.log('HTTP request completed')
         )
-        .subscribe(
-          res => console.log("HTTP response", res),
-          err => console.log("HTTP Error", err),
-          () => console.log('HTTP request completed')
-        )
-    };
+      };
 
     @Action(actions.FetchPostsSuccess)
     fetchAllSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.FetchPostsSuccess) {
@@ -125,9 +104,7 @@ export class PostState{
         ],
         request: {
           loading: false,
-          error:{
-            ...state.request.error
-          }
+          error: null
         }
       })
     };
@@ -145,7 +122,8 @@ export class PostState{
         error: 
         {
           message: payload.message,
-          error: payload.error
+          error: true,
+          errorResponse: payload.errorResponse
         }
         }
       });

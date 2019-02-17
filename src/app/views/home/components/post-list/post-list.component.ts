@@ -15,16 +15,12 @@ import { PostState } from 'src/app/store/state/post.state';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent implements OnInit {  
-
+export class PostListComponent implements OnInit {    
   constructor(
     public postsFacade: PostsFacadeService,
     public moviesFacade: MoviesFacadeService,
     ) { }
 
   ngOnInit() {
-  }
-  ngOnChange(){
-
   }
 }

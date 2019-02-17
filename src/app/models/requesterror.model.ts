@@ -1,4 +1,5 @@
 export interface RequestError{
   message: string,
-  error: string,
+  error: boolean,
+  errorResponse: string
 }

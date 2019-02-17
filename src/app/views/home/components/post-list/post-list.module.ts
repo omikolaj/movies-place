@@ -5,6 +5,7 @@ import { PostItemComponent } from './post-item/post-item.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from 'src/app/components/loader/loader.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LoaderModule } from 'src/app/components/loader/loader.module';
     CommonModule,
     AngularMaterialModule,
     RouterModule,
-    LoaderModule
+    LoaderModule,
+    SharedModule
   ],
   exports: [
     PostListComponent,

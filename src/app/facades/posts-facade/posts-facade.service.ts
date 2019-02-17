@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import * as actionTypes from 'src/app/store/actions/post.actions';
 import { Post } from 'src/app/models/post.model';
 import { PostState } from 'src/app/store/state/post.state';
-import { async } from '@angular/core/testing';
-import { mergeMap } from 'rxjs/operators';
+import { RequestError } from 'src/app/models/requesterror.model';
 
 
 @Injectable({
@@ -14,6 +13,7 @@ import { mergeMap } from 'rxjs/operators';
 export class PostsFacadeService {
   @Select(PostState.posts) posts$: Observable<Post[]>;
   @Select(PostState.request("loading")) loading$: Observable<boolean>;
+  @Select(PostState.request("error")) error$: Observable<RequestError>;
   constructor(private store: Store) {  }
 
   public loadPosts(): void{
