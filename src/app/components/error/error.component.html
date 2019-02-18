@@ -1,6 +1,6 @@
-<div *ngIf="error$ | async">
-  <p>Oops something went wrong</p>
-  <span>{{(error$ | async)?.errorStatus}}<br>{{(error$ | async)?.errorResponse}}</span>
+<div>
+  <p>Oops something went wrong</p>  
+  <span>{{error.errorStatus}}<br>{{error?.errorResponse}}</span>
 </div>
 
 
