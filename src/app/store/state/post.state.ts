@@ -69,9 +69,7 @@ export class PostState{
         ...state,
         request: {
           loading: true,
-          error: {
-            ...state.request.error
-          }
+          error: null
         }
       })
         return this.postService.fetchPosts().pipe(
@@ -115,10 +113,7 @@ export class PostState{
         ],
         request: {
         loading: false,
-        error: {
-          error: true,
-          errorResponse: payload
-          }
+        error: payload
         }
       });
     };

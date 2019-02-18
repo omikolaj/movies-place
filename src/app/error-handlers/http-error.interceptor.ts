@@ -9,6 +9,7 @@ import { Observable, throwError, iif, timer } from 'rxjs';
 import { catchError, retryWhen, delayWhen } from 'rxjs/operators';
 import { Injectable, Injector } from '@angular/core';
 import { RollbarService } from './error-handlers.module';
+import { RequestError } from '../models/requesterror.model';
  
  @Injectable({
    providedIn: 'root'
@@ -34,13 +35,18 @@ import { RollbarService } from './error-handlers.module';
         }),
         catchError((error: HttpErrorResponse) => {
           const rollbar = this.injector.get(RollbarService)
-          let errorMessage = '';
+          let errorMessage: RequestError = null;
           if (error.error instanceof ErrorEvent) {
             // client-side error
-            errorMessage = `Error: ${error.error.message}`;
+            errorMessage = {
+              errorResponse: `Error: ${error.error.message}`
+            };
           } else {
             // server-side error
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            errorMessage = {
+              errorStatus: `Error Code: ${error.status}`,
+              errorResponse : `Message: ${error.message}`
+            };
           }
           //window.alert(errorMessage);
           // Enable for deployment

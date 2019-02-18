@@ -1,5 +1,5 @@
-<div *ngIf="(error$ | async)?.error">
-  <span>Oops something went wrong...<br>{{(error$ | async)?.errorResponse}}</span>
+<div *ngIf="error$ | async">
+  <span>Oops something went wrong...<br>{{(error$ | async)?.errorResponse}}<br>{{(error$ | async)?.errorStatus}}</span>
 </div>
 
 

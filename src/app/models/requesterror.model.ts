@@ -1,4 +1,4 @@
 export interface RequestError{  
-  errorResponse: string
-  error: boolean
+  errorResponse: string,
+  errorStatus?: string
 }
