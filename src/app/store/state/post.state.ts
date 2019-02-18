@@ -21,11 +21,7 @@ export interface PostStateModel {
         posts: [],
         request: {
           loading: false,
-          error: {
-            error: false,
-            message: "",
-            errorResponse: ""
-          }
+          error: null
         }
     }
 })
@@ -119,12 +115,10 @@ export class PostState{
         ],
         request: {
         loading: false,
-        error: 
-        {
-          message: payload.message,
+        error: {
           error: true,
-          errorResponse: payload.errorResponse
-        }
+          errorResponse: payload
+          }
         }
       });
     };

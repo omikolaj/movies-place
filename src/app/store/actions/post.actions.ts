@@ -23,7 +23,7 @@ export class FetchPostsSuccess{
 
 export class FetchPostsFail{
   static readonly type = '[POST] FetchPostsFail'
-  constructor(public payload: RequestError ) {}
+  constructor(public payload: string ) {}
 }
 
 export class FetchPost{

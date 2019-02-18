@@ -1,0 +1,4 @@
+<div>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+  <app-error [error$]="responseError$"></app-error>
+</div>

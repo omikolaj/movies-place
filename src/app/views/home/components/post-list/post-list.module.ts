@@ -6,11 +6,12 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from 'src/app/components/loader/loader.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RequestHandlerComponent } from 'src/app/shared/request-handler/request-handler.component';
 
 @NgModule({
   declarations: [
     PostListComponent,
-    PostItemComponent, 
+    PostItemComponent
   ],
   imports: [
     CommonModule,

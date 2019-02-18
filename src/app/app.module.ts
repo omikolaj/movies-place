@@ -24,7 +24,7 @@ import { ErrorHandlersModule } from './error-handlers/error-handlers.module';
   declarations: [
     AppComponent,
     LayoutComponent,
-    PageNotFoundComponent,   
+    PageNotFoundComponent  
   ],
   imports: [
     BrowserModule,
