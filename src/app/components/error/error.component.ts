@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RequestError } from 'src/app/models/requesterror.model';
-import { Observable } from 'rxjs';
-import { InvokeFunctionExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-error',

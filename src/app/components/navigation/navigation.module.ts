@@ -24,7 +24,7 @@ library.add(faBars);
     CommonModule, 
     FontAwesomeModule,
     AngularMaterialModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     CommonModule,

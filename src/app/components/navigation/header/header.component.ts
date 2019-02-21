@@ -1,5 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PostItDialogService } from 'src/app/services/post-it-dialog.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,16 +15,26 @@ export class HeaderComponent implements OnInit {
   disabled: boolean = false;
   unbounded: boolean = false;
   color: string = "#ffffff29";
-  
+
   constructor(
-    private route: ActivatedRoute,
+    private postItDialogService: PostItDialogService,
+    public dialog: MatDialog,
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {
   }
 
-  public onToggleSidenav = () => {
+  public onToggleSidenav(): void {
     this.sidenavToggle.emit();
   }
 
+  public openDialog(): void {
+    // this.router.navigateByUrl('/post');       
+    const url = this.router.createUrlTree(['post']).toString();
+    this.location.go(url);
+    this.postItDialogService.openPostItDialog(this.dialog);    
+  }
 }
+

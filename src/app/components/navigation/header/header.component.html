@@ -41,13 +41,12 @@
         </a>
       </li>
       <li>
-        <a routerLink="post" 
-          routerLinkActive="active-route" 
-          [routerLinkActiveOptions]="{exact: true}"
+        <a 
+          (click)="openDialog()"
           class="nav-links nav-button"
-          #account>Post It!
+          #postIt>Post It!
           <div class="ripple" 
-            matRipple [matRippleTrigger]="account" 
+            matRipple [matRippleTrigger]="postIt" 
             [matRippleCentered]="centered" 
             [matRippleDisabled]="disabled"
             [matRippleUnbounded]="unbounded" 

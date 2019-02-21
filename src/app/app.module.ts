@@ -1,11 +1,10 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler, Injector, Injectable, InjectionToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './hoc/layout/layout.component'
 import { NavigationModule } from './components/navigation/navigation.module';
-import { HomeModule } from './views/home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -16,22 +15,22 @@ import { PostService } from './services/post/post.service';
 import { HomeService } from './services/home/home.service';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MovieState } from './store/state/movie.state';
-import { MoviesModule } from './views/movies/movies.module';
 import { HttpErrorInterceptor } from './error-handlers/http-error.interceptor';
 import { ErrorHandlersModule } from './error-handlers/error-handlers.module';
+import { ViewsModule } from './views/views.module';
+import { PostItDialogModule } from './views/post-it-dialog/post-it-dialog.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    PageNotFoundComponent  
+    PageNotFoundComponent,    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,        
     NavigationModule,
-    HomeModule,
-    MoviesModule,
+    ViewsModule,
     SharedModule,
     NgxsModule.forRoot([
       PostState,
@@ -40,13 +39,14 @@ import { ErrorHandlersModule } from './error-handlers/error-handlers.module';
     NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
     NgxsLoggerPluginModule.forRoot(),
     HttpClientModule,
-    ErrorHandlersModule
+    ErrorHandlersModule,
+    PostItDialogModule
   ],
   providers: [PostService, HomeService, {
     provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorInterceptor,
     multi: true
-  }],
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
