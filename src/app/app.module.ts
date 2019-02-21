@@ -1,7 +1,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './components/page-not-found/app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './hoc/layout/layout.component'
 import { NavigationModule } from './components/navigation/navigation.module';
@@ -18,7 +18,7 @@ import { MovieState } from './store/state/movie.state';
 import { HttpErrorInterceptor } from './error-handlers/http-error.interceptor';
 import { ErrorHandlersModule } from './error-handlers/error-handlers.module';
 import { ViewsModule } from './views/views.module';
-import { PostItDialogModule } from './views/post-it-dialog/post-it-dialog.module';
+import { PostItDialogModule } from './components/post-it-dialog/post-it-dialog.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { PostItDialogModule } from './views/post-it-dialog/post-it-dialog.module
     NgxsLoggerPluginModule.forRoot(),
     HttpClientModule,
     ErrorHandlersModule,
-    PostItDialogModule
+    PostItDialogModule    
   ],
   providers: [PostService, HomeService, {
     provide: HTTP_INTERCEPTORS,

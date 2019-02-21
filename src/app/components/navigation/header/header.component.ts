@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { PostItDialogService } from 'src/app/services/post-it-dialog.service';
 import { Location } from '@angular/common';
+import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   color: string = "#ffffff29";
 
   constructor(
-    private postItDialogService: PostItDialogService,
+    private postService: PostService,
     public dialog: MatDialog,
     private router: Router,
     private location: Location
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
     // this.router.navigateByUrl('/post');       
     const url = this.router.createUrlTree(['post']).toString();
     this.location.go(url);
-    this.postItDialogService.openPostItDialog(this.dialog);    
+    this.postService.openPostItDialog(this.dialog);    
   }
 }
 
