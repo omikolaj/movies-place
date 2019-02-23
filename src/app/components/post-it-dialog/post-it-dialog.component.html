@@ -1,11 +1,25 @@
-<h1>Hi</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
+<h1 mat-dialog-title>Post about a recent movie you watched!</h1>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div formGroupName="feed">
+      <mat-form-field>
+        <input id="postTitle" placeholder="Your title" matInput formControlName="title">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea id="description" placeholder="What did you think of the movie?" matInput formControlName="description"></textarea>
+      </mat-form-field>
+    </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button> 
+  <button mat-button [disabled]="!postForm.valid">Post It!</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>  
 </div>
+</form>
+
+
+<!-- <div formGroupName="movie">
+  <mat-form-field>
+    <input id="movieTitle" placeholder="Title of the movie" matInput formControlName="title">
+  </mat-form-field>
+</div> -->
+  

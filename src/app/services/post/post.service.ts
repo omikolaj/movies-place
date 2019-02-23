@@ -5,6 +5,8 @@ import { Post } from 'src/app/models/post.model';
 import { MatDialog } from '@angular/material/dialog';
 import { PostItDialog } from '../../components/post-it-dialog/post-it-dialog.component';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +14,32 @@ import { Location } from '@angular/common';
 export class PostService {
   name:string;
   constructor(private http: HttpClient,
-    private location: Location
+    private location: Location,
+    private router: Router
     ) { }
-
-  // Async Calls
-  fetchPosts(): Observable<Post[]>{
-    return this.http.get<Post[]>('api/v1/posts');
-  }
 
   public openPostItDialog(dialog: MatDialog): void {
     const dialogRef = dialog.open(PostItDialog, {
       width: '250px',
-      data: { name: this.name} 
+      data: { name: this.name }
     });
-    console.log("Dialog was open");    
+    const url = this.router.createUrlTree(['post']).toString();
+    this.location.go(url);
+    console.log("Dialog was open");
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");      
+      console.log("The dialog was closed");
       this.name = result;
       this.location.go("");
     })
+  }
+
+  // Async Calls
+  public fetchPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('api/v1/posts');
+  }
+
+  public createNewPost(form: FormGroup){
+    console.log(form);
   }
 }

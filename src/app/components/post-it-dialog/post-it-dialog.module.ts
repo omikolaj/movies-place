@@ -23,7 +23,7 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
   ],
   providers: [
     { provide: MatDialogRef, useValue: {} },
-    { provide:MAT_DIALOG_DATA, useValue:{} }
+    { provide:MAT_DIALOG_DATA, useValue:{} },
   ]
 })
 export class PostItDialogModule { }

@@ -42,7 +42,7 @@ import { PostItDialogModule } from './components/post-it-dialog/post-it-dialog.m
     ErrorHandlersModule,
     PostItDialogModule    
   ],
-  providers: [PostService, HomeService, {
+  providers: [HomeService, {
     provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorInterceptor,
     multi: true

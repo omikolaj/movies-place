@@ -1,7 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { Location } from '@angular/common';
 import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
@@ -18,9 +16,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    public dialog: MatDialog,
-    private router: Router,
-    private location: Location
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -30,10 +26,7 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
-  public openDialog(): void {
-    // this.router.navigateByUrl('/post');       
-    const url = this.router.createUrlTree(['post']).toString();
-    this.location.go(url);
+  public openDialog(): void {         
     this.postService.openPostItDialog(this.dialog);    
   }
 }
