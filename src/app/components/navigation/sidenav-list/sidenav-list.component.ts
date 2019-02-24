@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { PostService } from 'src/app/services/post/post.service';
+import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -12,7 +12,7 @@ export class SidenavListComponent implements OnInit {
   @Input() githubButtons: TemplateRef<any>;
  
   constructor(
-    private postService: PostService,
+    private postItDialogService: PostItDialogService,
     public dialog: MatDialog 
   ) { }
  
@@ -25,7 +25,7 @@ export class SidenavListComponent implements OnInit {
 
   public openDialog(): void {
     this.onSidenavClose();
-    this.postService.openPostItDialog(this.dialog);    
+    this.postItDialogService.openPostItDialog(this.dialog);    
   }
 
 

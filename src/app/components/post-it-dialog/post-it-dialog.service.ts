@@ -1,14 +1,28 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PostItDialog } from './post-it-dialog.component';
+import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PostItDialogService {
   
-  constructor( ) { }
+  constructor(
+    private location: Location,
+    private router: Router
+    ) { }
+ 
+  public openPostItDialog(dialog: MatDialog): void {
+    const dialogRef = dialog.open(PostItDialog, {
+      width: '350px'
+    });
+    const url = this.router.createUrlTree(['posts/new']).toString();
+    this.location.go(url);
+    console.log("Dialog was open");
 
-  public createNewPost(form: FormGroup){
-    console.log(form);
+    dialogRef.afterClosed().subscribe(() => {
+      console.log("The dialog was closed");
+      this.location.go("");
+    })
   }
 }

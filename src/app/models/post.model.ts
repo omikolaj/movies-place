@@ -3,13 +3,12 @@ import { User } from './user.model';
 
 export interface Post
 {
-  id: number,
+  id?: number,
   userID: number,
-  user: User,
+  user?: User,
   title: string,
-  description: string,
-  postData: DataCue,
-  comments: Comment[],
+  description: string,  
+  comments?: Comment[],
   movieID: number,
   movie: Movie,
   rating: Rating,

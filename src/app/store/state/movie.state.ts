@@ -14,7 +14,7 @@ export interface MovieStateModel {
     defaults: {
         movies: [],
         movie: {
-            id: 1,            
+            movieID: 1,            
             title: "",
             favorites: [],
             posts: []            
@@ -32,7 +32,7 @@ export class MovieState{
 
     @Action(FetchMovieDetails)
     getArticle({getState, patchState}: StateContext<MovieStateModel>, { payload }:FetchMovieDetails) {
-        console.log(getState().movies.filter(a => a.id === payload))
+        console.log(getState().movies.filter(a => a.movieID === payload))
     }
     
 }

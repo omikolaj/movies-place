@@ -1,18 +1,18 @@
 import { State, Action, StateContext, Selector, createSelector } from '@ngxs/store';
 import { PostService } from 'src/app/services/post/post.service';
-import { tap, switchMap, catchError, mergeMap, exhaustMap, retryWhen, delayWhen, delay, take, concatMap } from 'rxjs/operators';
+import { switchMap, catchError, mergeMap } from 'rxjs/operators';
 import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 import * as actions from '../actions/post.actions';
-import { timer, iif, throwError, of, SubscribableOrPromise } from 'rxjs';
+import { of } from 'rxjs';
+import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export interface PostStateModel {
     posts: Post[];
     request: {
         loading: boolean;
         error: RequestError;
-      }
-    
+      }    
 }
 
 @State<PostStateModel>({
@@ -40,16 +40,64 @@ export class PostState{
       })
     }
 
-    @Action(actions.AddPost)
-    add({getState, patchState}: StateContext<PostStateModel>, { payload }: actions.AddPost){
-        const state = getState();
-        patchState({
-            posts: [...state.posts, payload]
+    @Action(actions.CreatePost)
+    add(ctx: StateContext<PostStateModel>, { payload }: actions.CreatePost){
+        const state = ctx.getState();
+        ctx.patchState({
+          ...state,
+          request: {
+            loading: true,
+            error: null
+          }
         })
+        return this.postService.createNewPost(payload).pipe(
+          mergeMap((addPostRequest) => {
+            console.log(`Adding new post: ${payload}`);
+            return ctx.dispatch(new actions.CreatePostSuccess(addPostRequest))}),
+          catchError((error) => {
+            ctx.dispatch(new actions.CreatePostFail(error));
+            return of([]);
+          }))
+          .subscribe(
+            res => console.log("HTTP response", res),
+            err => console.log("HTTP Error", err),
+            () => console.log('HTTP request completed')
+        )
+    };
+
+    @Action(actions.CreatePostSuccess)
+    createPostSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.CreatePostSuccess) {
+      const state = ctx.getState();
+      ctx.patchState({
+        ...state,
+        posts: [
+          payload,
+          ...state.posts
+        ],
+        request: {
+          loading: false,
+          error: null
+        }
+      })
+    };
+
+    @Action(actions.FetchPostsFail)
+    createPostFail(ctx: StateContext<PostStateModel>, { payload }: actions.FetchPostsFail){
+      const state = ctx.getState();
+      return ctx.patchState({
+        ...state,
+        posts: [
+          ...state.posts
+        ],
+        request: {
+        loading: false,
+        error: payload
+        }
+      });
     };
 
     @Action(actions.FetchPost)
-    fetchPost(ctx: StateContext<PostStateModel>)
+    fetchPost()
     {
       
     };

@@ -1,14 +1,24 @@
 import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 
-export class AddPost {
-    static readonly type = '[POST] Add';
-    constructor(public payload: Post) {}
+export class CreatePost {
+    static readonly type = '[POST] CreatePost';
+    constructor(public payload: Post) { }
+}
+
+export class CreatePostSuccess{
+  static readonly type = '[POST] CreatePostSuccess'
+  constructor(public payload: Post) { }
+}
+
+export class CreatePostFail{
+  static readonly type = '[POST] CreatePostFail'
+  constructor(public payload: RequestError) { }
 }
 
 export class RemovePost{
     static readonly type = '[POST] Remove';
-    constructor(public payload: Post) {}
+    constructor(public payload: Post) { }
 }
 
 export class FetchPosts{
@@ -23,7 +33,7 @@ export class FetchPostsSuccess{
 
 export class FetchPostsFail{
   static readonly type = '[POST] FetchPostsFail'
-  constructor(public payload: RequestError ) {}
+  constructor(public payload: RequestError ) { }
 }
 
 export class FetchPost{

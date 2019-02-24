@@ -50,7 +50,7 @@ import { RequestError } from '../models/requesterror.model';
           }
           //window.alert(errorMessage);
           // Enable for deployment
-          //rollbar.error(error);
+          rollbar.error(error);
           return throwError(errorMessage);
         })
       )

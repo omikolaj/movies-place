@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PostService } from 'src/app/services/post/post.service';
+import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   color: string = "#ffffff29";
 
   constructor(
-    private postService: PostService,
+    private postItDialogService: PostItDialogService,
     public dialog: MatDialog
   ) { }
 
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public openDialog(): void {         
-    this.postService.openPostItDialog(this.dialog);    
+    this.postItDialogService.openPostItDialog(this.dialog);    
   }
 }
 

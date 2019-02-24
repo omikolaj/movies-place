@@ -5,7 +5,7 @@ import * as actionTypes from 'src/app/store/actions/post.actions';
 import { Post } from 'src/app/models/post.model';
 import { PostState } from 'src/app/store/state/post.state';
 import { RequestError } from 'src/app/models/requesterror.model';
-
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,22 @@ export class PostsFacadeService {
   public loadPosts(): void{
     console.log("Dispatching FetchPosts from PostsFacadeService");      
     this.store.dispatch(new actionTypes.FetchPosts());
+  }
+
+  public createPost(post: FormGroup): void{
+    console.log("Dispatching AddPost from PostsFacadeService");
+    const newPost: Post = {
+      userID: 1,
+      title: post.value.postTitle,
+      description: post.value.description,
+      rating: post.value.rating,
+      movieID: 1,
+      movie: {
+        movieID: 1,
+        title: post.value.movieTitle,        
+      }
+    }
+    this.store.dispatch(new actionTypes.CreatePost(newPost));
   }
 
 }

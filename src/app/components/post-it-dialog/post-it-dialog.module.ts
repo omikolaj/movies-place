@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PostItDialog } from './post-it-dialog.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
+import { PostItDialogService } from './post-it-dialog.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
     PostItDialog
   ],
   providers: [
+    PostItDialogService,
     { provide: MatDialogRef, useValue: {} },
     { provide:MAT_DIALOG_DATA, useValue:{} },
   ]
