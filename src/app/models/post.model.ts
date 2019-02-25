@@ -3,7 +3,7 @@ import { User } from './user.model';
 
 export interface Post
 {
-  id?: number,
+  postID?: number,
   userID: number,
   user?: User,
   title: string,

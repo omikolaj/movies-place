@@ -22,7 +22,7 @@ export class PostsFacadeService {
   }
 
   public createPost(post: FormGroup): void{
-    console.log("Dispatching AddPost from PostsFacadeService");
+    console.log("Dispatching CreatePost from PostsFacadeService");
     const newPost: Post = {
       userID: 1,
       title: post.value.postTitle,

@@ -142,13 +142,13 @@ export class PostState{
       ctx.patchState({
         ...state,
         posts: [
-          ...payload
+          ...payload.sort((p1, p2) => p2.postID - p1.postID)
         ],
         request: {
           loading: false,
           error: null
         }
-      })
+      });
     };
 
     @Action(actions.FetchPostsFail)
