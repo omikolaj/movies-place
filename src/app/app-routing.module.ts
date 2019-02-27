@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeRoutingModule } from './views/home/home-routing.routing';
 import { MoviesRoutingModule } from './views/movies/movies-routing.routing';
+import { HomeView } from './views/home/home.view';
 
-const routes: Routes = [          
+const routes: Routes = [   
   { path: 'not-found', component: PageNotFoundComponent, pathMatch: 'full' },
   { path: '**', redirectTo: 'not-found'}
 ];

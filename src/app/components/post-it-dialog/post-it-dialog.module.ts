@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PostItDialog } from './post-it-dialog.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { PostItDialogService } from './post-it-dialog.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PostItDialogService } from './post-it-dialog.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,    
-    AngularMaterialModule
+    AngularMaterialModule,
+    SharedModule
   ],
   exports: [
     PostItDialog
@@ -25,7 +27,7 @@ import { PostItDialogService } from './post-it-dialog.service';
   providers: [
     PostItDialogService,
     { provide: MatDialogRef, useValue: {} },
-    { provide:MAT_DIALOG_DATA, useValue:{} },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
   ]
 })
 export class PostItDialogModule { }
