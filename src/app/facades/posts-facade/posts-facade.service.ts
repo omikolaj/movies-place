@@ -27,7 +27,7 @@ export class PostsFacadeService {
       userID: 1,
       title: post.value.postTitle,
       description: post.value.description,
-      rating: post.value.rating,
+      rating: 2,
       movieID: 1,
       movie: {
         movieID: 1,

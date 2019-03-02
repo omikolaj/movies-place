@@ -50,7 +50,7 @@ export class PostState{
           }
         })
         return this.postService.createNewPost(payload).pipe(
-          mergeMap((addPostRequest) => {
+          switchMap((addPostRequest) => {
             console.log(`Adding new post: ${payload}`);
             return ctx.dispatch(new actions.CreatePostSuccess(addPostRequest))}),
           catchError((error) => {

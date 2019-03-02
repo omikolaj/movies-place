@@ -18,6 +18,8 @@ import { ErrorHandlersModule } from './error-handlers/error-handlers.module';
 import { ViewsModule } from './views/views.module';
 import { PostItDialogModule } from './components/post-it-dialog/post-it-dialog.module';
 import { AppRoutingModule } from './app-routing.module';
+import { UserState } from './store/state/user.state';
+import { AuthState } from './store/state/auth.state';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     NgxsModule.forRoot([
       PostState,
-      MovieState
+      MovieState,
+      UserState,
+      AuthState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
     NgxsLoggerPluginModule.forRoot(),

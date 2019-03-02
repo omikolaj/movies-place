@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SessionFacadeService } from 'src/app/facades/session-facade/session-facade.service';
+import { AuthFacadeService } from 'src/app/facades/auth-facade/auth-facade.service';
 
 
  @Component({
@@ -15,7 +15,7 @@ export class AuthView implements OnInit {
 
    constructor(
     private fb: FormBuilder,
-    private sessionFacadeService: SessionFacadeService
+    private authFacadeService: AuthFacadeService
   ) { }
 
    ngOnInit() {    
@@ -32,8 +32,8 @@ export class AuthView implements OnInit {
   }
 
    public onLogin(){
-    console.log(`Inside of onSubmit.`, this.loginForm);
-    this.sessionFacadeService.login(this.loginForm);
+    console.log(`Inside of onLogin.`, this.loginForm);
+    this.authFacadeService.login(this.loginForm)      
   }
 
    public onSignup(){

@@ -25,7 +25,7 @@
             {{rating}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="postForm.get('rating').errors['required']">Please select a rating</mat-error>
+        <mat-error *ngIf="postForm.get('rating').invalid">Please select a rating</mat-error>
       </mat-form-field>
       <mat-form-field>
         <textarea matInput placeholder="Description" formControlName="description"></textarea>

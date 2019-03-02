@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService{
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-public authenticate(user: User): Observable<User>{
-  console.log(`Authenticating user from UserService. User:${user}`);
-  return of({username: "UserFromAuthenticateService", password: "password"});
- }
+
 }
