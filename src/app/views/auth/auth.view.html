@@ -1,10 +1,10 @@
-<!-- <app-login [mode]="login" [authForm]="authForm">
+<app-login [mode]="login" [authForm]="authForm">
     <p *login>
       Static Card Template
     </p>
-</app-login> -->
+</app-login>
 
-<!-- <ng-template #authFormTemplate>
+ <!-- <ng-template #authFormTemplate>
     <form  [formGroup]="authForm" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <input matInput placeholder="Username" formControlName="userName" >
@@ -21,39 +21,39 @@
     </form>
   </ng-template> -->
 
-<mat-tab-group>
-  <mat-tab label="Login">
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <mat-form-field>
-        <input matInput placeholder="Username" formControlName="userName">
-        <mat-error *ngIf="loginForm.get('userName').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" type="password">
-        <mat-error *ngIf="loginForm.get('password').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <div>
-        <button mat-button [disabled]="!loginForm.valid">Login!</button>
-      </div>
-    </form>
-  </mat-tab>
-  <mat-tab label="Sign Up">
-    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
-      <mat-form-field>
-        <input matInput placeholder="Username" formControlName="userName">
-        <mat-error *ngIf="signupForm.get('userName').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="E-mail" formControlName="email">
-        <mat-error *ngIf="signupForm.get('email').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" type="password">
-        <mat-error *ngIf="signupForm.get('password').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <div>
-        <button mat-button [disabled]="!signupForm.valid">Sign Up!</button>
-      </div>
-    </form>
-  </mat-tab>
-</mat-tab-group>
+  <!-- <mat-tab-group>
+      <mat-tab label="Login">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="loginForm.get('username').invalid">You must enter a value</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <mat-error *ngIf="loginForm.get('password').invalid">You must enter a value</mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button [disabled]="!loginForm.valid">Login!</button>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Sign Up">
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+          <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="signupForm.get('username').invalid">You must enter a value</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="E-mail" formControlName="email">
+            <mat-error *ngIf="signupForm.get('email').invalid">You must enter a value</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <mat-error *ngIf="signupForm.get('password').invalid">You must enter a value</mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button [disabled]="!signupForm.valid">Sign Up!</button>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>  -->

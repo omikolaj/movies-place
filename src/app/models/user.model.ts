@@ -3,11 +3,11 @@ import { Favorite } from './favorite.model';
 
 export interface User
 {
-  userID: number,
+  userID?: number,
   username: string,
-  email: string,
+  email?: string,
   password: string,
-  comments: Comment[],
-  posts: Post[],
-  favorites: Favorite[]
+  comments?: Comment[],
+  posts?: Post[],
+  favorites?: Favorite[]
 }

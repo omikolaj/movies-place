@@ -27,4 +27,9 @@ export class LoginView implements OnInit {
     console.log("Inside of login, loginTemplate: ",this.loginTemplate)
   }
 
+  ngAfterContentInit(){
+    console.log("Inside of login, loginTemplate: ", this.loginTemplate)
+    setTimeout(() => { console.log("Inside of login, loginTemplate: ", this.loginTemplate); }, 2000); 
+  }
+
 }

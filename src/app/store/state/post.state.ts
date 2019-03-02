@@ -5,7 +5,6 @@ import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 import * as actions from '../actions/post.actions';
 import { of } from 'rxjs';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export interface PostStateModel {
     posts: Post[];
@@ -27,7 +26,7 @@ export interface PostStateModel {
 })
 
 export class PostState{    
-    constructor(private postService: PostService) {}
+    constructor(private postService: PostService) { }
 
     @Selector()
     static posts(state: PostStateModel){
@@ -60,8 +59,8 @@ export class PostState{
           }))
           .subscribe(
             res => console.log("HTTP response", res),
-            err => console.log("HTTP Error", err),
-            () => console.log('HTTP request completed')
+            err => console.log("HTTP error", err),
+            () => console.log("HTTP request completed")
         )
     };
 
