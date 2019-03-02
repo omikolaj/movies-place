@@ -4,7 +4,7 @@ import { MoviesView } from './movies.view';
 import { MovieDetailComponent } from 'src/app/shared/movie-detail/movie-detail.component';
 
 const routes: Routes = [    
-    { path: 'movies',   children: [
+    { path: 'movies', children: [
         { path: '', component: MoviesView },
         { path: ':id', component: MovieDetailComponent }
   ]},
@@ -12,10 +12,10 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes)
+      RouterModule.forChild(routes)
     ],
     exports: [
-        RouterModule
+      RouterModule
     ]
 })
 export class MoviesRoutingModule { }

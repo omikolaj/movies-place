@@ -1,7 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './components/page-not-found/app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './hoc/layout/layout.component'
 import { NavigationModule } from './components/navigation/navigation.module';
@@ -18,6 +17,7 @@ import { HttpErrorInterceptor } from './error-handlers/http-error.interceptor';
 import { ErrorHandlersModule } from './error-handlers/error-handlers.module';
 import { ViewsModule } from './views/views.module';
 import { PostItDialogModule } from './components/post-it-dialog/post-it-dialog.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
