@@ -9,7 +9,7 @@ export class Login {
 
 export class LoginSuccess {
   static readonly type = '[LOGIN] LoginSuccess';
-  constructor(public payload: Auth) { }
+  constructor(public payload: any) { }
 }
 
 export class LoginFail {

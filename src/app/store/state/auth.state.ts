@@ -4,7 +4,7 @@ import * as actions from '../actions/auth.actions';
 import { catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Auth } from 'src/app/models/auth.model';
+import { Auth, Roles, Permissions } from 'src/app/models/auth.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as jwt_decode from "jwt-decode";
 
@@ -43,6 +43,15 @@ export class AuthState {
     })
   }
 
+  private getDecodedAccessToken(token: string): any{
+    try{
+      return jwt_decode(token);
+    }
+    catch(error){
+      return null;
+    }
+  }
+
   @Action(actions.Login)
   authenticate(ctx: StateContext<AuthStateModel>, { payload }: actions.Login) {
     console.log("Inside of authenticate. Payload is:", payload);
@@ -79,14 +88,19 @@ export class AuthState {
   @Action(actions.LoginSuccess)
   loginSuccess(ctx: StateContext<AuthStateModel>, { payload }: actions.LoginSuccess){
     console.log("Inside of loginSuccess", payload);
+    const parsedToken = JSON.parse(payload);
+    const token = this.getDecodedAccessToken(parsedToken.token);
+    const permissions = token.permission.map(p => Permissions[p]);    
+    const roles = token.role.map(r => Roles[r]);
     const state = ctx.getState();
     ctx.patchState({
       ...state,      
       auth: {
-        id: payload.id,
-        expires_in: payload.expires_in,
-        username: payload.username,
-        token: payload.token
+        id: parsedToken.id,
+        expires_in: parsedToken.expires_in,
+        username: token.UserName,
+        roles: roles,        
+        permissions: permissions
       },
       authorized: true,
       request: {

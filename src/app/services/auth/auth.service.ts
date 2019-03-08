@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Auth } from 'src/app/models/auth.model';
 import * as moment from "moment";
-import { tap, share, shareReplay } from 'rxjs/operators';
-import * as jwt_decode from "jwt-decode";
+import { tap, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,18 +28,15 @@ export class AuthService {
    }
 
    private setSession(authResult): void{          
-     const expiresAt = moment().add(authResult.expires_in, 'second');
-     const token = this.getDecodedAccessToken(authResult.token);
+     const expiresAt = moment().add(authResult.expires_in, 'second');     
 
      localStorage.setItem('token', authResult.token);
      localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-     localStorage.setItem('role', token.role);
    }
 
    public logout(): void{
     localStorage.removeItem('token');
     localStorage.RemoveItem('expires_at');
-    localStorage.RemoveItem('role');
    }
 
    public get isLoggedIn(): boolean{
@@ -58,23 +53,8 @@ export class AuthService {
      return moment(expiresAt);
    }
 
-   public get userRole(): Roles{
-     return Roles[localStorage.getItem('role')];
-   }
+  //  public get userRole(): Roles{
+  //    return Roles[localStorage.getItem('role')];
+  //  }
 
-   private getDecodedAccessToken(token: string): any{
-     try{
-       return jwt_decode(token);
-     }
-     catch(error){
-       return null;
-     }
-   }
-
-}
-
-export enum Roles{  
-  User = "User",
-  Admin = "Admin",
-  SuperUser = "SuperUser"
 }
