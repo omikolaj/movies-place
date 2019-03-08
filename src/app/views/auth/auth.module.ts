@@ -19,7 +19,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,    
-    AngularMaterialModule
+    AngularMaterialModule,
+    SharedModule
   ],
   exports:[
     LoginView,

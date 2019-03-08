@@ -1,4 +1,7 @@
 export interface Auth{
-  username: string,
-  token: string
+  id?: string,
+  token?: string,
+  expires_in?: string,
+  username?: string,
+  password?: string
 }

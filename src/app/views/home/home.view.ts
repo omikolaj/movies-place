@@ -9,18 +9,13 @@ import { PostsFacadeService } from 'src/app/facades/posts-facade/posts-facade.se
   providers: [PostService]
 })
 export class HomeView implements OnInit {
+
   constructor(
-    private postsFacade: PostsFacadeService
-    ) {
-      
-     }
+    private postsFacade: PostsFacadeService   
+    ) { }
 
   ngOnInit() {
     this.postsFacade.loadPosts();
   }
-
-  // fetchArticles(): void{
-  //   this.store.dispatch(new FetchArticles());        
-  // }
 
 }

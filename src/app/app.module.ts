@@ -20,6 +20,7 @@ import { PostItDialogModule } from './components/post-it-dialog/post-it-dialog.m
 import { AppRoutingModule } from './app-routing.module';
 import { UserState } from './store/state/user.state';
 import { AuthState } from './store/state/auth.state';
+import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,12 @@ import { AuthState } from './store/state/auth.state';
     provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorInterceptor,
     multi: true
-  },],
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

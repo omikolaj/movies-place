@@ -16,12 +16,12 @@ export class PostsFacadeService {
   @Select(PostState.request("error")) error$: Observable<RequestError>;
   constructor(private store: Store) {  }
 
-  public loadPosts(): void{
+  public loadPosts(): Observable<any>{
     console.log("Dispatching FetchPosts from PostsFacadeService");      
-    this.store.dispatch(new actionTypes.FetchPosts());
+    return this.store.dispatch(new actionTypes.FetchPosts());
   }
 
-  public createPost(post: FormGroup): void{
+  public createPost(post: FormGroup): Observable<any>{
     console.log("Dispatching CreatePost from PostsFacadeService");
     const newPost: Post = {
       userID: 1,
@@ -34,7 +34,8 @@ export class PostsFacadeService {
         title: post.value.movieTitle,        
       }
     }
-    this.store.dispatch(new actionTypes.CreatePost(newPost));
+    return this.store.dispatch(new actionTypes.CreatePost(newPost));
+    
   }
 
 }

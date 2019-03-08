@@ -45,12 +45,9 @@ import { RequestError } from '../models/requesterror.model';
             // server-side error
             errorMessage = {
               errorStatus: `Error Code: ${error.status}`,
-              errorResponse : `Message: ${error.message}`
+              errorResponse : `Message: ${error.message}`,
             };
           }
-          //window.alert(errorMessage);
-          // Enable for deployment
-          rollbar.error(error);
           return throwError(errorMessage);
         })
       )
