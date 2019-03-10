@@ -21,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserState } from './store/state/user.state';
 import { AuthState } from './store/state/auth.state';
 import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor.service';
+import { AuthGuard } from './services/auth/auth-guard/auth-guard.';
 
 @NgModule({
   declarations: [
@@ -46,16 +47,19 @@ import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor.se
     ErrorHandlersModule,
     PostItDialogModule    
   ],
-  providers: [HomeService, {
+  providers: [HomeService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorInterceptor,
     multi: true
   },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// For Auth interceptor
+// {
+//   provide: HTTP_INTERCEPTORS,
+//   useClass: AuthInterceptor,
+//   multi: true
+// }

@@ -9,6 +9,7 @@ import { tap, shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  public redirectUrl: string = "";
 
   constructor(private http: HttpClient) { }
 
@@ -30,12 +31,12 @@ export class AuthService {
    private setSession(authResult): void{          
      const expiresAt = moment().add(authResult.expires_in, 'second');     
 
-     localStorage.setItem('token', authResult.token);
+    //  localStorage.setItem('token', authResult.token);
      localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
    }
 
    public logout(): void{
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
     localStorage.RemoveItem('expires_at');
    }
 

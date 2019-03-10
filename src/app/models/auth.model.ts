@@ -1,5 +1,5 @@
 export interface Auth{
-  id?: string,
+  userId?: string,
   token?: string,
   expires_in?: string,
   username?: string,

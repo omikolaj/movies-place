@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     "Bearer " + idToken)
             });
 
-            return next.handle(cloned);
+            return next.handle(cloned);            
         }
         else {
             return next.handle(req);

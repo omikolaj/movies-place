@@ -13,7 +13,7 @@ import { RequestError } from 'src/app/models/requesterror.model';
 })
 export class AuthFacadeService {
   @Select(AuthState.request("loading")) loading$: Observable<boolean>;
-  @Select(AuthState.request("error")) error$: Observable<RequestError>;
+  @Select(AuthState.request("error")) error$: Observable<RequestError>;  
 
   constructor(private store: Store) { }
 

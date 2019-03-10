@@ -67,7 +67,7 @@ export class AuthState {
       switchMap((userAuthRequest) => {
         const userAuth: Auth = {
           token: userAuthRequest.token,
-          id: userAuthRequest.id,
+          userId: userAuthRequest.userId,
           expires_in: userAuthRequest.expires_in
         }
         console.log("Inside of user state authenticate merge map method", userAuthRequest);
@@ -88,18 +88,19 @@ export class AuthState {
   @Action(actions.LoginSuccess)
   loginSuccess(ctx: StateContext<AuthStateModel>, { payload }: actions.LoginSuccess){
     console.log("Inside of loginSuccess", payload);
-    const parsedToken = JSON.parse(payload);
+    const payloadAsString = payload.toString();
+    const parsedToken = JSON.parse(payloadAsString);
     const token = this.getDecodedAccessToken(parsedToken.token);
-    const permissions = token.permission.map(p => Permissions[p]);    
-    const roles = token.role.map(r => Roles[r]);
+    const permissions = token.permission.map(p => Permissions[p]);   
+    const userRoles = token.role instanceof Array ? token.role.map(r => Roles[r]) : Roles[token.role];
     const state = ctx.getState();
     ctx.patchState({
       ...state,      
       auth: {
-        id: parsedToken.id,
+        userId: parsedToken.id,
         expires_in: parsedToken.expires_in,
         username: token.UserName,
-        roles: roles,        
+        roles: userRoles,        
         permissions: permissions
       },
       authorized: true,
