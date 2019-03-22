@@ -125,11 +125,12 @@ export class PostState{
             console.log("Inside of switchMap. Dispatching posts success")
             return ctx.dispatch(new actions.FetchPostsSuccess(postsRequest))}),
           catchError((error) => {
+            console.log("Inside of catchError in fetchAll Posts");
             ctx.dispatch(new actions.FetchPostsFail(error));
             return of([]);
           }))
           .subscribe(
-            res => console.log("HTTP response", res),
+            res => console.log("HTTP response headers", res),
             err => console.log("HTTP Error", err),
             () => console.log('HTTP request completed')
         )

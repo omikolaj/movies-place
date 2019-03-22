@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -13,7 +14,8 @@ export class SidenavListComponent implements OnInit {
  
   constructor(
     private postItDialogService: PostItDialogService,
-    public dialog: MatDialog 
+    public dialog: MatDialog,
+    private authService: AuthService
   ) { }
  
   ngOnInit() {

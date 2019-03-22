@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Auth } from 'src/app/models/auth.model';
 import * as moment from "moment";
-import { tap, shareReplay } from 'rxjs/operators';
+import { tap, shareReplay, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
+import * as actions from '../../store/actions/auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 export class AuthService {
   public redirectUrl: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router, private store: Store) { }
 
   public authenticate(user: Auth): Observable<Auth>{
     console.log(`Authenticating user from Auth. User:${user}`);
@@ -28,16 +31,43 @@ export class AuthService {
     );
    }
 
-   private setSession(authResult): void{          
+   public refreshToken(): Observable<Auth>{
+     console.log('Refreshing token from refreshToken');
+     return this.http.get<any>('api/v1/refresh').pipe(
+       tap(
+         res => {
+           console.log("This is the result from the refreshToken method:", res);
+           return this.setSession(res);
+         }
+       ),
+       shareReplay()
+     )
+   }
+
+   public unauthorized(): Observable<boolean> | Promise<boolean>{
+    return this.route.navigate(['login']);
+   }
+
+   private setSession(authResult): void{   
      const expiresAt = moment().add(authResult.expires_in, 'second');     
 
     //  localStorage.setItem('token', authResult.token);
      localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
    }
 
-   public logout(): void{
+   public logout(): Observable<boolean>{
     // localStorage.removeItem('token');
-    localStorage.RemoveItem('expires_at');
+    localStorage.removeItem('expires_at');
+    console.log("Inside of logout in auth.service.ts");
+
+    return this.http.delete<boolean>('api/v1/session/logout').pipe(
+      tap(
+        res => {
+          console.log("Logout response:", res);
+        }
+      ),
+      shareReplay()
+    )    
    }
 
    public get isLoggedIn(): boolean{
@@ -53,9 +83,5 @@ export class AuthService {
      const expiresAt = JSON.parse(expiration);
      return moment(expiresAt);
    }
-
-  //  public get userRole(): Roles{
-  //    return Roles[localStorage.getItem('role')];
-  //  }
 
 }

@@ -13,7 +13,7 @@ import { RequestError } from 'src/app/models/requesterror.model';
 })
 export class AuthFacadeService {
   @Select(AuthState.request("loading")) loading$: Observable<boolean>;
-  @Select(AuthState.request("error")) error$: Observable<RequestError>;  
+  @Select(AuthState.request("error")) error$: Observable<RequestError>;
 
   constructor(private store: Store) { }
 
@@ -24,5 +24,10 @@ export class AuthFacadeService {
       password: userLoginInfo.value.password
     }
     return this.store.dispatch(new actions.Login(user))
+  }
+
+  public logout(): Observable<boolean>{
+    console.log("Inside of logout in session facade");
+    return this.store.dispatch(new actions.Logout());
   }
 }

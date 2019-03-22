@@ -14,9 +14,10 @@ export class SessionService {
     console.log(`Authenticating user from UserService. User:${user}`);
     const headers = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'    
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + JSON.stringify(user)
       })
     }
-    return this.http.post<User>('api/v1/session/login', JSON.stringify(user), headers);    
+    return this.http.post<User>('api/v1/session/login', headers);    
    }
 }

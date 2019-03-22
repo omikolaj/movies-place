@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthFacadeService } from 'src/app/facades/auth-facade/auth-facade.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private postItDialogService: PostItDialogService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private authServiceFacade: AuthFacadeService
   ) { }
 
   ngOnInit() {

@@ -12,7 +12,9 @@ export class PostService {
 
   // Async Calls
   public fetchPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('api/v1/posts');
+    return this.http.get<Post[]>('api/v1/posts')
+      
+
   }
 
   public createNewPost(post: Post): Observable<Post>{

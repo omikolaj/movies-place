@@ -48,10 +48,10 @@ import { AuthGuard } from './services/auth/auth-guard/auth-guard.';
     PostItDialogModule    
   ],
   providers: [HomeService, AuthGuard, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpErrorInterceptor,
-    multi: true
-  },
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

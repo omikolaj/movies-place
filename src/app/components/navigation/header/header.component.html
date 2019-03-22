@@ -23,7 +23,7 @@
   
   <div>
     <ul class="main-nav" [ngClass]="{'active': navbarOpen}" id="js-menu">
-      <li>
+      <!-- <li>
         <a routerLink="movies" 
           routerLinkActive="active-route" 
           [routerLinkActiveOptions]="{exact: true}" 
@@ -39,7 +39,7 @@
             [matRippleColor]="color"></div>
           <div class="mat-button-focus-overlay"></div>
         </a>
-      </li>
+      </li> -->
       <li>
         <a 
           (click)="openDialog()"
@@ -56,7 +56,7 @@
           <div class="mat-button-focus-overlay"></div>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a routerLink="account" 
           routerLinkActive="active-route" 
           [routerLinkActiveOptions]="{exact: true}"
@@ -71,6 +71,41 @@
             [matRippleRadius]="radius" 
             [matRippleColor]="color">
           </div>
+          <div class="mat-button-focus-overlay"></div>
+        </a>
+      </li> -->      
+      <li *ngIf="authService.isLoggedOut">
+        <a
+         routerLink="login" 
+          routerLinkActive="active-route" 
+          [routerLinkActiveOptions]="{exact: true}" 
+          class="nav-links nav-button"
+          #login>Login
+          <div class="ripple" 
+            matRipple 
+            [matRippleTrigger]="login" 
+            [matRippleCentered]="centered" 
+            [matRippleDisabled]="disabled"
+            [matRippleUnbounded]="unbounded" 
+            [matRippleRadius]="radius" 
+            [matRippleColor]="color"></div>
+          <div class="mat-button-focus-overlay"></div>
+        </a>
+      </li>
+      <li *ngIf="authService.isLoggedIn" #logout>
+        <a (click)="authServiceFacade.logout()" 
+          routerLinkActive="active-route" 
+          [routerLinkActiveOptions]="{exact: true}" 
+          class="nav-links nav-button"
+          #logout>Logout
+          <div class="ripple" 
+            matRipple 
+            [matRippleTrigger]="logout" 
+            [matRippleCentered]="centered" 
+            [matRippleDisabled]="disabled"
+            [matRippleUnbounded]="unbounded" 
+            [matRippleRadius]="radius" 
+            [matRippleColor]="color"></div>
           <div class="mat-button-focus-overlay"></div>
         </a>
       </li>
