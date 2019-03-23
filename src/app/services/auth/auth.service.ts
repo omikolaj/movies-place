@@ -7,6 +7,7 @@ import { tap, shareReplay, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import * as actions from '../../store/actions/auth.actions';
+import { User } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,21 @@ export class AuthService {
     );
    }
 
+   public signUp(user: User): Observable<Auth>{
+    console.log("Inside of signUp in the auth service");
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'    
+      })
+    }
+    return this.http.post<any>("api/v1/session/signup", JSON.stringify(user), headers).pipe(
+      tap(
+        res => this.setSession(JSON.parse(res))
+      ),
+      shareReplay()
+    )
+   }
+
    public refreshToken(): Observable<Auth>{
      console.log('Refreshing token from refreshToken');
      return this.http.get<any>('api/v1/refresh').pipe(
@@ -49,21 +65,21 @@ export class AuthService {
    }
 
    private setSession(authResult): void{   
-     const expiresAt = moment().add(authResult.expires_in, 'second');     
-
+     const expiresAt = moment().add(authResult.expires_in, 'second');         
     //  localStorage.setItem('token', authResult.token);
      localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+     console.log("Is user logged in: ", this.isLoggedIn);
    }
 
    public logout(): Observable<boolean>{
-    // localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
+    // localStorage.removeItem('token');    
     console.log("Inside of logout in auth.service.ts");
 
     return this.http.delete<boolean>('api/v1/session/logout').pipe(
       tap(
         res => {
           console.log("Logout response:", res);
+          localStorage.removeItem('expires_at');
         }
       ),
       shareReplay()

@@ -9,6 +9,7 @@ import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 import { RepoPickerComponent } from './repo-picker/repo-picker.component';
 import { GithubButtonComponent } from './repo-picker/github-button/github-button.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 library.add(faBars);
 
@@ -25,6 +26,7 @@ library.add(faBars);
     FontAwesomeModule,
     AngularMaterialModule,
     RouterModule,
+    SharedModule
   ],
   exports: [
     CommonModule,

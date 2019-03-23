@@ -32,6 +32,21 @@ export class LogoutFail{
   constructor(public payload: RequestError) { };
 }
 
+export class SignUp{
+  static readonly type = '[SIGNUP] SignUp'
+  constructor(public payload: User) { };
+}
+
+export class SignUpSuccess{
+  static readonly type = '[SIGNUP] SignUpSuccess'
+  constructor(public payload: Auth) { };
+}
+
+export class SignUpFail{
+  static readonly type = '[SIGNUP] SignUpFail'
+  constructor(public payload: RequestError) { };
+}
+
 export class RefreshToken {
   static readonly type = '[REFRESH_TOKEN] RefreshToken';
   constructor() { }
@@ -45,4 +60,9 @@ export class RefreshTokenFail {
 export class RefreshTokenSuccess {
   static readonly type = '[REFRESH_TOKEN] RefreshTokenSuccess';
   constructor(public payload: any) { }
+}
+
+export class Unauthorized {
+  static readonly type = '[UNAUTHORIZED] Unauthorized';
+  constructor() { };
 }

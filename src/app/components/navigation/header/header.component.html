@@ -40,7 +40,7 @@
           <div class="mat-button-focus-overlay"></div>
         </a>
       </li> -->
-      <li>
+      <li *ngIf="authService.isLoggedIn">
         <a 
           (click)="openDialog()"
           class="nav-links nav-button"

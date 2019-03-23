@@ -25,7 +25,7 @@ import * as actions from '../store/actions/auth.actions';
           return errors.pipe(
             delayWhen((error, i) => {
               console.log(`Are error headers null: ${error.headers == null}`)
-              if(error.headers != null && i == 1){
+              if(error.headers != null && error.status == 401 && i == 1){
                 console.log(`Headers contain token-expired: ${error.headers.get("token-expired") != null}`);
                 if(error.headers.get("token-expired")){
                   console.log("Trying to refresh the token");

@@ -30,4 +30,15 @@ export class AuthFacadeService {
     console.log("Inside of logout in session facade");
     return this.store.dispatch(new actions.Logout());
   }
+
+  public signUp(newUserForm: FormGroup): Observable<Auth>{
+    console.log("Inside of signup in session facade");
+    const newUser: User = {
+      username: newUserForm.value.username,
+      email: newUserForm.value.email,
+      password: newUserForm.value.password
+    };    
+
+    return this.store.dispatch(new actions.SignUp(newUser));
+  }
 }

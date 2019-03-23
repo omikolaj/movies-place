@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@an
 import { MatDialog } from '@angular/material';
 import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthFacadeService } from 'src/app/facades/auth-facade/auth-facade.service';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -11,11 +12,13 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class SidenavListComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
   @Input() githubButtons: TemplateRef<any>;
+  unauthorizedSubscription: any;
  
   constructor(
     private postItDialogService: PostItDialogService,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private authFacadeService: AuthFacadeService
   ) { }
  
   ngOnInit() {
@@ -28,6 +31,11 @@ export class SidenavListComponent implements OnInit {
   public openDialog(): void {
     this.onSidenavClose();
     this.postItDialogService.openPostItDialog(this.dialog);    
+  }
+
+  public logout(): void {
+    this.onSidenavClose();
+    this.authFacadeService.logout();
   }
 
 

@@ -34,7 +34,7 @@ export class AuthState {
   constructor(private authService: AuthService) { }
 
   @Selector()
-  static users(state: AuthStateModel) {
+  static auth(state: AuthStateModel) {
     return state.auth;
   }
 
@@ -42,6 +42,11 @@ export class AuthState {
     return createSelector([AuthState], (state: AuthStateModel) => {
       return state.request[type];
     })
+  } 
+
+  @Selector()
+  static authorized(state: AuthStateModel){
+    return state.authorized
   }
 
   private getDecodedAccessToken(token: string): any{
@@ -51,6 +56,70 @@ export class AuthState {
     catch(error){
       return null;
     }
+  }
+
+  @Action(actions.SignUp)
+  signUp(ctx: StateContext<AuthStateModel>, { payload }: actions.SignUp){
+    console.log("Inside of signUp action. Payload is: ", payload);
+    const state = ctx.getState();
+    ctx.patchState({
+      ...state,
+      authorized: false,      
+      request: {
+        loading: true,
+        error: null
+      }
+    })
+    return this.authService.signUp(payload).pipe(
+      switchMap((signUpUserRequest) => {
+        return ctx.dispatch(new actions.SignUpSuccess(signUpUserRequest))
+      }),
+      catchError((error) => {
+        ctx.dispatch(new actions.SignUpFail(error))
+        return of({});
+      })
+    )
+    .subscribe((res) => console.log("HTTP request completed", res));
+  }
+
+  @Action(actions.SignUpSuccess)
+  signUpSuccess(ctx: StateContext<AuthStateModel>, { payload }: actions.SignUpSuccess){
+    console.log("Inside of sign up success action");
+    const payloadAsString = payload.toString();
+    const parsedToken = JSON.parse(payloadAsString);
+    const token = this.getDecodedAccessToken(parsedToken.token);
+    const permissions = token.permission.map(p => Permissions[p]);   
+    const userRoles = token.role instanceof Array ? token.role.map(r => Roles[r]) : Roles[token.role];
+    const state = ctx.getState();
+    ctx.patchState({
+      ...state,
+      authorized: true,
+      auth: {
+        userId: parsedToken.id,
+        expires_in: parsedToken.expires_in,
+        username: token.UserName,
+        roles: userRoles,
+        permissions: permissions
+      },
+      request:{
+        loading: false,
+        error: null
+      }
+    })
+  }
+
+  @Action(actions.SignUpFail)
+  signUpFail(ctx: StateContext<AuthStateModel>, { payload }: actions.SignUpFail){
+    console.log("Inside of sign up success action");
+    const state = ctx.getState();
+    ctx.patchState({
+      ...state,
+      authorized: false,
+      request:{
+        loading: false,
+        error: payload
+      }
+    })
   }
 
   @Action(actions.Login)
@@ -243,5 +312,18 @@ export class AuthState {
       }      
     })
     return this.authService.unauthorized();
+  }
+
+  @Action(actions.Unauthorized)
+  unauthorized(ctx: StateContext<AuthStateModel>){
+    const state = ctx.getState();
+    ctx.patchState({
+      ...state,
+      authorized: false,
+      request: {
+        loading: state.request.loading,
+        error: null
+      }
+    })
   }
 }

@@ -4,6 +4,7 @@ import { switchMap, catchError, mergeMap } from 'rxjs/operators';
 import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 import * as actions from '../actions/post.actions';
+import * as authActions from '../actions/auth.actions';
 import { of } from 'rxjs';
 
 export interface PostStateModel {
@@ -152,9 +153,13 @@ export class PostState{
     };
 
     @Action(actions.FetchPostsFail)
-    fetchAllFail({getState, patchState}: StateContext<PostStateModel>, { payload }: actions.FetchPostsFail){
-      const state = getState();
-      return patchState({
+    fetchAllFail(ctx: StateContext<PostStateModel>, { payload }: actions.FetchPostsFail){      
+      if(payload.errorStatus.includes("401"))
+      {
+        ctx.dispatch(new authActions.Unauthorized());
+      }
+      const state = ctx.getState();
+      ctx.patchState({
         ...state,
         posts: [
           ...state.posts
@@ -164,6 +169,7 @@ export class PostState{
         error: payload
         }
       });
+      
     };
 
 }

@@ -8,6 +8,7 @@ import { ErrorModule } from '../components/error/error.module';
 import { RatingToArrayPipe } from './pipes/rating-to-array/rating-to-array.pipe';
 import { LoginDirective } from './directives/login/login.directive';
 import { SignupDirective } from './directives/signup/signup.directive';
+import { IsLoggedInDirective } from './directives/is-logged-in.directive';
 
 
 
@@ -17,7 +18,8 @@ import { SignupDirective } from './directives/signup/signup.directive';
     RequestHandlerComponent,
     RatingToArrayPipe,
     LoginDirective,
-    SignupDirective
+    SignupDirective,
+    IsLoggedInDirective
   ],
   imports: [
     CommonModule,
