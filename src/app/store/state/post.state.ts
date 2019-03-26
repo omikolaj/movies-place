@@ -81,8 +81,8 @@ export class PostState{
       })
     };
 
-    @Action(actions.FetchPostsFail)
-    createPostFail(ctx: StateContext<PostStateModel>, { payload }: actions.FetchPostsFail){
+    @Action(actions.CreatePostFail)
+    createPostFail(ctx: StateContext<PostStateModel>, { payload }: actions.CreatePostFail){
       const state = ctx.getState();
       return ctx.patchState({
         ...state,

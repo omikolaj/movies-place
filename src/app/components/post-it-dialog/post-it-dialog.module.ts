@@ -7,9 +7,10 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
 import { PostItDialogService } from './post-it-dialog.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+
 @NgModule({
   declarations: [
-    PostItDialog,    
+    PostItDialog,
   ],
   entryComponents: [
     PostItDialog

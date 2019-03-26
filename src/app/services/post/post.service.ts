@@ -17,8 +17,13 @@ export class PostService {
 
   public createNewPost(post: Post): Observable<Post>{
     console.log(post);
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'    
+      })
+    }
 
-    return this.http.post<Post>('api/v1/posts', JSON.stringify(post)).pipe(
+    return this.http.post<Post>('api/v1/posts', JSON.stringify(post), headers).pipe(
       shareReplay()
     )
       //This will not re-trigger the request if there are multiple subscribers

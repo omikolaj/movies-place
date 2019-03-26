@@ -21,8 +21,8 @@
       <mat-form-field>
         <mat-select placeholder="Movie Rating" formControlName="rating" required>
           <mat-option>--</mat-option>
-          <mat-option *ngFor="let rating of ratings | ratingToArray; let i=index" value="rating + i">
-            {{rating}}
+          <mat-option *ngFor="let rating of ratings | ratingToArray; let i=index" [value]="i">
+            {{rating}} - {{i}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="postForm.get('rating').invalid">Please select a rating</mat-error>

@@ -4,7 +4,7 @@ import { User } from './user.model';
 export interface Post
 {
   postID?: number,
-  userID: number,
+  userID?: string,
   user?: User,
   title: string,
   description: string,  
@@ -15,9 +15,9 @@ export interface Post
 }
 
 export enum Rating {
-  Bad = 1,
-  OK = 2,
-  Decent = 3,
-  Great = 4,
-  Excellent = 5
+  Bad = 0,
+  OK = 1,
+  Decent = 2,
+  Great = 3,
+  Excellent = 4
 }

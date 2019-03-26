@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostsFacadeService } from 'src/app/facades/posts-facade/posts-facade.service';
 import { MoviesFacadeService } from 'src/app/facades/movies-facade/movies-facade.service';
 import { RequestError } from 'src/app/models/requesterror.model';
+import { Rating } from 'src/app/models/post.model';
 
 @Component({
   selector: 'app-post-list',

@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, TemplateRef, ContentChildren, QueryList, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthFacadeService } from 'src/app/facades/auth-facade/auth-facade.service';
 import { ofActionSuccessful, ofActionDispatched, Actions } from '@ngxs/store';
 import * as actions from '../../store/actions/auth.actions';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTabChangeEvent } from '@angular/material';
+import { MatTab } from "@angular/material/tabs"
+import { RequestError } from 'src/app/models/requesterror.model';
+
 
 
 @Component({
@@ -15,19 +18,25 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AuthView implements OnInit {
   public loginForm: FormGroup;
-  public signupForm: FormGroup;
-  public mode: string = 'login';
+  public signupForm: FormGroup;  
   private afterSuccessLogin: Subscription;
   private afterFailLogin: Subscription;
   private afterSuccessSignUp: Subscription;
   private unauthorizedSubscription: Subscription;
+  private afterSignupFail: Subscription;
+  private errors: string[];
+  tabs = ['login', 'signup'];
+  selected = new FormControl(0);
+  emailError : string = null;
+  usernameError : string = null;
 
   constructor(
     private fb: FormBuilder,
     private authFacade: AuthFacadeService,
     private router: Router,
     private actions$: Actions,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
   ) {
     this.afterSuccessLogin = this.actions$.pipe(ofActionSuccessful(actions.LoginSuccess))
       .subscribe(
@@ -36,24 +45,80 @@ export class AuthView implements OnInit {
           return this.router.navigate(['']);
         }
       );
+
     this.afterFailLogin = this.actions$.pipe(ofActionDispatched(actions.LoginFail))
       .subscribe(
-        (error) => console.log("error occured", error)
+        (error) => {
+          console.log("error occured", error)
+          let authError;
+          const subscribtion = this.authFacade.error$.subscribe(
+            (value) => {
+              console.log("Inside of afterFailLogin, the value is: ", value);
+              return authError = value;
+            })
+          const errorMessage: string = authError.customError.login_failure[0];
+          subscribtion.unsubscribe();
+          
+          this.loginForm.controls['username'].setErrors({invalid: true});
+          this.loginForm.controls['password'].setValue('');
+          this.loginForm.controls['password'].setErrors({invalid: true});
+
+          return this.openSnackBar(errorMessage, "Dismiss");
+        }        
       );
+
     this.afterSuccessSignUp = this.actions$.pipe(ofActionSuccessful(actions.SignUpSuccess))
       .subscribe(
         () => {
           console.log("Inside of on successful sign up ");
           return this.router.navigate(['']);
         }
-      );    
-
-      this.unauthorizedSubscription = this.actions$.pipe(ofActionDispatched(actions.Unauthorized))
-      .subscribe(
-        () => {          
-          return this.openSnackBar();
-        }
       );
+
+      this.afterSignupFail = this.actions$.pipe(ofActionDispatched(actions.SignUpFail))
+        .subscribe(
+          () => {
+            console.log("Inside of on signup fail");
+            let signUpError: RequestError;
+          const subscribtion = this.authFacade.error$.subscribe(
+            (value) => {
+              console.log("Inside of afterFailLogin, the value is: ", value);
+              return signUpError = value;
+            })          
+          subscribtion.unsubscribe();
+          if(signUpError.errorStatus.includes("400")){
+            let validationErrorDictinary = signUpError.customError;
+            for(var fieldName in validationErrorDictinary){
+              if(validationErrorDictinary.hasOwnProperty(fieldName)){
+                if(this.signupForm.controls[fieldName]){
+                  validationErrorDictinary[fieldName].forEach(element => {                                        
+                    if(fieldName == 'email'){
+                      this.emailError = element;
+                    }
+                    if(fieldName == 'username'){
+                      this.usernameError = element;
+                    }
+                  });
+                  this.signupForm.controls[fieldName].setErrors({invalid: true});   
+                }
+                else{
+                  this.errors.push(validationErrorDictinary[fieldName]);
+                }
+              }
+            }
+          }else{
+            this.errors.push("Something went wrong!");
+          }
+        }
+        )
+
+    this.unauthorizedSubscription = this.actions$.pipe(ofActionDispatched(actions.Unauthorized))
+      .subscribe(
+        () => {
+          return this.openSnackBar("You must be authorized", "Dismiss");
+        }
+      );      
+
   }
 
   ngOnInit() {
@@ -67,16 +132,39 @@ export class AuthView implements OnInit {
       username: this.fb.control(null, [Validators.maxLength(25), Validators.minLength(4), Validators.required]),
       password: this.fb.control(null, [Validators.required])
     })
+    
   }
 
   ngOnDestroy() {
     this.afterSuccessLogin.unsubscribe();
     this.afterFailLogin.unsubscribe();
     this.afterSuccessSignUp.unsubscribe();
+    this.afterSignupFail.unsubscribe();
+    this.unauthorizedSubscription.unsubscribe();
   }
 
-  openSnackBar() {
-    this.snackBar.open("You must be authenticated", "Dismiss", {
+  ngAfterContentChecked(){    
+    const activeTabIndex = parseInt(localStorage.getItem('selectedTab'));
+    if(this.selected.value != activeTabIndex){
+      this.selected.setValue(activeTabIndex); 
+    }
+  }
+
+  onTabChange(event: MatTabChangeEvent){
+    console.log("Change tab event: ", event);
+    if(event.tab.textLabel.toLocaleLowerCase() == "sign up"){
+      localStorage.setItem("selectedTab", event.index.toString());
+      window.history.replaceState({}, '', '/signup')     
+      console.log(this.tabs);
+    }
+    if(event.tab.textLabel.toLocaleLowerCase() == 'login'){      
+      localStorage.setItem("selectedTab", event.index.toString());
+      window.history.replaceState({}, '', '/login')      
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
       duration: 3000,
     });
   }

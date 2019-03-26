@@ -22,12 +22,14 @@ import { UserState } from './store/state/user.state';
 import { AuthState } from './store/state/auth.state';
 import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor.service';
 import { AuthGuardService } from './services/auth/auth-guard/auth-guard.';
+import { PostItDialogContainerComponent } from './components/post-it-dialog-container/post-it-dialog-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    PageNotFoundComponent,    
+    PageNotFoundComponent,
+    PostItDialogContainerComponent, 
   ],
   imports: [
     BrowserModule,

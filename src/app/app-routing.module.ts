@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './views/home/home-routing.routing';
 import { MoviesRoutingModule } from './views/movies/movies-routing.routing';
 import { AuthRoutingModule } from './views/auth/auth-routing.routing';
 
-const routes: Routes = [    
+const routes: Routes = [      
   { path: 'not-found', component: PageNotFoundComponent, pathMatch: 'full' },
   { path: '**', redirectTo: 'not-found'}
 ];

@@ -9,7 +9,7 @@
     </mat-card-title>
     <mat-card-subtitle>
       <div>
-          {{ post.movie.title }}
+          {{ post.movie.title }} - {{rating}}
       </div>
     </mat-card-subtitle>
   </mat-card-header>
@@ -17,14 +17,14 @@
   <mat-card-content>
     <div>
         <h3>{{ post.title }}</h3>
-        <p>{{ post.content }}</p>
+        <p>{{ post.description }}</p>
     </div>      
   </mat-card-content>
   <mat-card-actions>
     <div class="article-buttons">
       <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-      <button mat-button>COMMENTS</button>
+      <button mat-button *ngIf="checkUser()" (click)="onPostEdit()">EDIT</button>
+      <button mat-button *ngIf="checkUser()" (click)="onPostDelete()">DELETE</button>
     </div>    
   </mat-card-actions>
 </mat-card>

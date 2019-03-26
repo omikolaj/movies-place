@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     HomeView,
-    FeedComponent,
+    FeedComponent,    
   ],
   imports: [
     CommonModule,

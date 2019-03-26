@@ -7,8 +7,8 @@ import { AuthGuardService } from 'src/app/services/auth/auth-guard/auth-guard.';
 
 const routes: Routes = [    
     { path: 'movies', canActivate: [AuthGuardService], children: [
-        { path: '', component: MoviesView },
-        { path: ':id', component: MovieDetailComponent }
+        { path: '', component: MoviesView, outlet: 'modal' },
+        { path: ':id', component: MovieDetailComponent, outlet: 'modal' }
   ]},
 ]
 

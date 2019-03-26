@@ -6,6 +6,9 @@ import { AuthView } from './auth.view';
 
 
 const routes: Routes = [  
+  { path: 'signup', children: [
+    { path: '', component: AuthView }
+  ]},
   { path: 'login', children: [
     { path: '', component: AuthView }
   ]}

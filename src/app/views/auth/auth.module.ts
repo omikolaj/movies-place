@@ -8,6 +8,7 @@ import { SignupView } from './components/signup/signup.view';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { LoaderModule } from 'src/app/components/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RouterModule,
     ReactiveFormsModule,    
     AngularMaterialModule,
-    SharedModule
+    SharedModule,
+    LoaderModule
   ],
   exports:[
     LoginView,

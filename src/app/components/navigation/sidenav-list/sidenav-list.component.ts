@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AuthFacadeService } from 'src/app/facades/auth-facade/auth-facade.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -18,7 +19,9 @@ export class SidenavListComponent implements OnInit {
     private postItDialogService: PostItDialogService,
     public dialog: MatDialog,
     private authService: AuthService,
-    private authFacadeService: AuthFacadeService
+    private authFacadeService: AuthFacadeService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
  
   ngOnInit() {
@@ -30,7 +33,7 @@ export class SidenavListComponent implements OnInit {
 
   public openDialog(): void {
     this.onSidenavClose();
-    this.postItDialogService.openPostItDialog(this.dialog);    
+    this.router.navigateByUrl('posts/(modal:new)');  
   }
 
   public logout(): void {

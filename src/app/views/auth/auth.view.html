@@ -1,32 +1,14 @@
-<!-- <app-login [mode]="login" [authForm]="authForm">
-    <p *login>
-      Static Card Template
-    </p>
-</app-login> -->
+<!--DISPLAY CROSS VALIDATIONS HERE. Any validation that is not bound to a property on the form that comes back from the server-->
+  <app-loader *ngIf="(authFacade.loading$ | async) else auth"></app-loader>
 
- <!-- <ng-template #authFormTemplate>
-    <form  [formGroup]="authForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <input matInput placeholder="Username" formControlName="userName" >
-        <mat-error *ngIf="postForm.get('userName').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="E-mail" formControlName="email" >
-        <mat-error *ngIf="postForm.get('email').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" type="password">
-        <mat-error *ngIf="postForm.get('password').invalid">You must enter a value</mat-error>
-      </mat-form-field>
-    </form>
-  </ng-template> -->
-
-  <mat-tab-group>
-      <mat-tab label="Login">
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!(authFacade.loading$ | async) && !(authFacade.error$ | async) else requestHandler">
-          <mat-form-field>
+  <ng-template #auth>  
+  <mat-tab-group (selectedTabChange)="onTabChange($event)" [selectedIndex]="selected.value">
+      <mat-tab label="Login">   
+        <ng-template matTabContent>       
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" >
+          <mat-form-field>                   
             <input matInput placeholder="Username" formControlName="username">
-            <mat-error *ngIf="loginForm.get('username').invalid">You must enter a value</mat-error>
+            <mat-error *ngIf="loginForm.get('username').invalid">You must enter a value</mat-error>            
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Password" formControlName="password" type="password">
@@ -36,16 +18,24 @@
             <button mat-button [disabled]="!loginForm.valid">Login!</button>
           </div>
         </form>
+      </ng-template>
       </mat-tab>
-      <mat-tab label="Sign Up">
+      <mat-tab label="Sign Up" >
+        <ng-template matTabContent>  
         <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
           <mat-form-field>
-            <input matInput placeholder="Username" formControlName="username">
-            <mat-error *ngIf="signupForm.get('username').invalid">You must enter a value</mat-error>
+            <input matInput placeholder="Username" formControlName="username">            
+              <mat-error *ngIf="usernameError != null else error">{{usernameError}}</mat-error>
+              <ng-template #error>
+                <mat-error>You must enter a value</mat-error>            
+              </ng-template>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="E-mail" formControlName="email">
-            <mat-error *ngIf="signupForm.get('email').invalid">You must enter a value</mat-error>
+            <mat-error *ngIf="emailError != null else errorEmail">{{emailError}}</mat-error>                          
+            <ng-template #errorEmail>
+              <mat-error >You must enter a value</mat-error>
+            </ng-template>            
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Password" formControlName="password" type="password">
@@ -54,11 +44,14 @@
           <div>
             <button mat-button [disabled]="!signupForm.valid">Sign Up!</button>
           </div>
-        </form>        
+        </form>   
+      </ng-template>     
       </mat-tab>
     </mat-tab-group> 
+  </ng-template>
 
-    <ng-template #requestHandler>
+    <!-- <ng-template #requestHandler>
+      *ngIf="!(authFacade.loading$ | async) && !(authFacade.error$ | async) else requestHandler"
       <app-request-handler [loading$]="authFacade.loading$" [responseError$]="authFacade.error$">
       </app-request-handler>
-    <ng-template>
+    <ng-template> -->

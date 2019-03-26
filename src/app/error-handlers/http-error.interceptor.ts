@@ -53,8 +53,11 @@ import * as actions from '../store/actions/auth.actions';
             //server-side error
             errorMessage = {
               errorStatus: `Error Code: ${error.status}`,
-              errorResponse : `Message: ${error.message}`,
+              errorResponse : `Message: ${error.message}`,              
             };            
+            if(error.error){
+              errorMessage.customError = error.error;
+            }
           }
           return throwError(errorMessage);          
         })

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostItDialogService } from '../../post-it-dialog/post-it-dialog.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AuthFacadeService } from 'src/app/facades/auth-facade/auth-facade.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,9 @@ export class HeaderComponent implements OnInit {
     private postItDialogService: PostItDialogService,
     public dialog: MatDialog,
     private authService: AuthService,
-    private authServiceFacade: AuthFacadeService
+    private authServiceFacade: AuthFacadeService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -30,8 +33,9 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
-  public openDialog(): void {         
-    this.postItDialogService.openPostItDialog(this.dialog);    
+  public openDialog(): void {
+    console.log("Inside of openDialog for new post");         
+    this.router.navigateByUrl('posts/(modal:new)');    
   }
 }
 
