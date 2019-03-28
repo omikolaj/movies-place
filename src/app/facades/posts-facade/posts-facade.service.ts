@@ -47,19 +47,10 @@ export class PostsFacadeService {
     
   }
 
-  public editPost(post: Post){
-    const postToEdit: Post = {
-      userID: post.userID,
-      title: post.title,
-      description: post.description,
-      rating: post.rating,
-      movieID: 1,
-      movie: {
-        movieID: 1,
-        title: post.movie.title
-      }
-    }
+  public updatePost(updatedPost: Post){
+    console.log("Dispatching UpdatePost from PostsFacadeService");
     
+    return this.store.dispatch(new actionTypes.UpdatePost(updatedPost))
   }
 
 }

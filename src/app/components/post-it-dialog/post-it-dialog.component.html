@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="post-it-title">Post Creation</h1>
+<h1 mat-dialog-title class="post-it-title">{{editMode ? 'Edit Post' : 'Post Creation'}}</h1>
 <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
   <mat-horizontal-stepper>
     <mat-step>
@@ -22,7 +22,7 @@
         <mat-select placeholder="Movie Rating" formControlName="rating" required>
           <mat-option>--</mat-option>
           <mat-option *ngFor="let rating of ratings | ratingToArray; let i=index" [value]="i">
-            {{rating}} - {{i}}
+            {{rating}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="postForm.get('rating').invalid">Please select a rating</mat-error>
@@ -33,7 +33,7 @@
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious type="button">Back</button>
-        <button mat-button [disabled]="!postForm.valid">Post It!</button>
+        <button mat-button [disabled]="!postForm.valid">{{editMode ? 'Update' : 'Post it'}}</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

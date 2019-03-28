@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Auth } from 'src/app/models/auth.model';
 import { Router } from '@angular/router';
 import * as actions from '../../store/actions/auth.actions';
+import { Post } from 'src/app/models/post.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,7 @@ import * as actions from '../../store/actions/auth.actions';
   providers: [PostService]
 })
 export class HomeView implements OnInit {
-
+  public posts: Post[];
   constructor(
     private postsFacade: PostsFacadeService,
     private router: Router,
@@ -23,8 +25,23 @@ export class HomeView implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.postsFacade.loadPosts();
-    
+    this.postsFacade.posts$.pipe(
+      map(
+        (posts: Post[]) => this.posts = posts 
+      )
+    )
+    .subscribe(
+      (posts: Post[]) => {
+        console.log("Posts were loaded");
+      }
+    )
+    if(this.posts.length == 0){
+      this.postsFacade.loadPosts();
+    }
+  }
+
+  ngOnDestroy(){
+    console.log("HomeView component on destroy");
   }
 
 }

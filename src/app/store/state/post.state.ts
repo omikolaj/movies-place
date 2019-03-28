@@ -172,4 +172,66 @@ export class PostState{
       
     };
 
+    @Action(actions.UpdatePost)
+    updatePost(ctx: StateContext<PostStateModel>, { payload }: actions.UpdatePost){
+      const state = ctx.getState();
+      ctx.patchState({
+        ...state,
+        posts: [
+          ...state.posts
+        ],
+        request: {
+          loading: true,
+          error: null
+        }
+      })
+      return this.postService.updatePost(payload).pipe(
+        switchMap((postUpdateRequest) => {
+          return ctx.dispatch(new actions.UpdatePostSuccess(postUpdateRequest));
+        }),
+        catchError((error) => {
+          ctx.dispatch(new actions.UpdatePostFail(error));
+          return of({});
+        })        
+      )
+      .subscribe(
+        res => console.log("HTTP response success", res),
+        err => console.log("HTTP error", err),
+        () => console.log("HTTP request completed")
+      )
+    }
+
+    @Action(actions.UpdatePostSuccess)
+    updatePostSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.UpdatePostSuccess){
+      const state = ctx.getState();
+      let updatedPosts = [...state.posts];
+      const filteredPosts = updatedPosts.filter(p => p.postID !== payload.postID);
+      const sortedPosts = [...filteredPosts, payload].sort((p1, p2) => p2.postID - p1.postID);
+      ctx.patchState({
+        ...state,
+        posts: [
+          ...sortedPosts
+        ],
+        request: {
+          loading: false,
+          error: null
+        }        
+      })
+    }
+
+    @Action(actions.UpdatePostFail)
+    updatePostFail(ctx: StateContext<PostStateModel>, { payload }: actions.UpdatePostFail){
+      const state = ctx.getState();
+      ctx.patchState({
+        ...state,
+        posts: [
+          ...state.posts
+        ],
+        request: {
+          loading: false,
+          error: payload
+        }
+      })
+    }
+
 }

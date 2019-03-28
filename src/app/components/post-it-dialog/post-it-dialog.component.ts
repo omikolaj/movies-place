@@ -57,8 +57,26 @@ export class PostItDialog implements OnInit {
 
   onSubmit(){    
     this.dialogRef.close();
-    console.log("Inside of onSubmit new post",this.postForm);        
-    this.postsFacade.createPost(this.postForm, this.authService.currentUserID);
+    console.log("Inside of onSubmit new post",this.postForm);         
+    if(this.editMode){
+      const post = this.posts.find(p => p.postID == this.postID);  
+      const updatedPost: Post = {
+        userID: post.userID,
+        postID: post.postID,
+        description: this.postForm.value.description,
+        title: this.postForm.value.postTitle,
+        rating: this.postForm.value.rating,
+        movieID: 1,
+        movie: {
+          movieID: 1, 
+          title: post.movie.title
+        }
+      }
+      this.postsFacade.updatePost(updatedPost);
+    }    
+    else{
+      this.postsFacade.createPost(this.postForm, this.authService.currentUserID);
+    } 
   }
 
   onNoClick(): void{    

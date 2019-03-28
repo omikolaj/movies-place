@@ -29,4 +29,14 @@ export class PostService {
       //This will not re-trigger the request if there are multiple subscribers
       
   }
+
+  public updatePost(updatedPost: Post){
+    console.log("Inside of updatePost");
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this.http.patch<Post>(`api/v1/posts/${updatedPost.postID}`, JSON.stringify(updatedPost), headers)
+  }
 }

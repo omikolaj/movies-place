@@ -40,3 +40,18 @@ export class FetchPost{
     static readonly type = '[POST] FetchPost'
     constructor(public payload: number) { }
 }
+
+export class UpdatePost{
+  static readonly type ='[POST] UpdatePost';
+  constructor(public payload: Post) { }
+}
+
+export class UpdatePostSuccess{
+  static readonly type = '[POST] UpdatePostSuccess';
+  constructor(public payload: Post) { }
+}
+
+export class UpdatePostFail{
+  static readonly type = '[POST] UpdatePostFail';
+  constructor(public payload: RequestError) { }
+}
