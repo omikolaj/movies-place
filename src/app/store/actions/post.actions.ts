@@ -55,3 +55,19 @@ export class UpdatePostFail{
   static readonly type = '[POST] UpdatePostFail';
   constructor(public payload: RequestError) { }
 }
+
+export class DeletePost{
+  static readonly type = '[POST] DeletePost';
+  constructor(public payload: number) { };
+}
+
+export class DeletePostSuccess{
+  static readonly type = '[POST] DeletePostSuccess';
+  constructor(public payload: number) { };
+}
+
+export class DeletePostFail{
+  static readonly type = '[POST] DeletePostFail';
+  constructor(public payload: RequestError) { };
+}
+

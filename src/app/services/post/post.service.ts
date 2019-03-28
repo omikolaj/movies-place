@@ -39,4 +39,14 @@ export class PostService {
     }
     return this.http.patch<Post>(`api/v1/posts/${updatedPost.postID}`, JSON.stringify(updatedPost), headers)
   }
+
+  public deletePost(postToDeleteID: number): Observable<number>{
+    console.log("Inside of deletePost with ID: ", postToDeleteID);
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this.http.delete<number>(`api/v1/posts/${postToDeleteID}`, headers);
+  }
 }

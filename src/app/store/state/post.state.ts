@@ -204,7 +204,7 @@ export class PostState{
     @Action(actions.UpdatePostSuccess)
     updatePostSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.UpdatePostSuccess){
       const state = ctx.getState();
-      let updatedPosts = [...state.posts];
+      const updatedPosts = [...state.posts];
       const filteredPosts = updatedPosts.filter(p => p.postID !== payload.postID);
       const sortedPosts = [...filteredPosts, payload].sort((p1, p2) => p2.postID - p1.postID);
       ctx.patchState({
@@ -233,5 +233,63 @@ export class PostState{
         }
       })
     }
+
+    @Action(actions.DeletePost)
+    deletePost(ctx: StateContext<PostStateModel>, { payload }: actions.DeletePost){
+      const state = ctx.getState();
+      ctx.patchState({
+        ...state,
+        posts: [
+          ...state.posts
+        ],
+        request: {
+          loading: true,
+          error: null
+        }
+      })
+      return this.postService.deletePost(payload).pipe(
+        switchMap(deletePostRequest => {
+          return ctx.dispatch(new actions.DeletePostSuccess(deletePostRequest))
+        }),
+        catchError(error => {
+          return ctx.dispatch(new actions.DeletePostFail(error))
+        })
+      )
+      .subscribe(
+        (request) => console.log("The post deletion was successful", request),
+        (err) => console.log("There was an error deleting the post", err)
+      )
+    }
+
+    @Action(actions.DeletePostSuccess)
+    deletePostSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.DeletePostSuccess){
+      const state = ctx.getState();
+      const filteredPosts = state.posts.filter(p => p.postID !== payload).sort((p1, p2) => p2.postID - p1.postID);
+      ctx.patchState({
+        ...state,
+        posts: [
+          ...filteredPosts
+        ],
+        request: {
+          loading: false,
+          error: null
+        }
+      })
+    }
+
+    @Action(actions.DeletePostFail)
+      deletePostFail(ctx: StateContext<PostStateModel>, { payload }: actions.DeletePostFail){
+        const state = ctx.getState();
+        ctx.patchState({
+          ...state,
+          posts: [
+            ...state.posts
+          ],
+          request: {
+            loading: false,
+            error: payload
+          }
+        })
+      }
 
 }

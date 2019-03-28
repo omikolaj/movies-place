@@ -53,4 +53,8 @@ export class PostsFacadeService {
     return this.store.dispatch(new actionTypes.UpdatePost(updatedPost))
   }
 
+  public deletePost(postToDelete: number){
+    return this.store.dispatch(new actionTypes.DeletePost(postToDelete))
+  }
+
 }
