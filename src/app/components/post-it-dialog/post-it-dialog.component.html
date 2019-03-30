@@ -31,6 +31,7 @@
         <textarea matInput placeholder="Description" formControlName="description"></textarea>
         <mat-error *ngIf="postForm.get('description').invalid">You must enter a value</mat-error>
       </mat-form-field>
+      <input type="file" (change)="onFileSelected($event)">   
       <div>
         <button mat-button matStepperPrevious type="button">Back</button>
         <button mat-button [disabled]="!postForm.valid">{{editMode ? 'Update' : 'Post it'}}</button>

@@ -6,11 +6,13 @@ import { PostsFacadeService } from 'src/app/facades/posts-facade/posts-facade.se
 import { Rating, Post } from 'src/app/models/post.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Params } from '@fortawesome/fontawesome-svg-core';
-import { ActivatedRoute, Router,  ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { PostState } from 'src/app/store/state/post.state';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
+import { Cloudinary } from '@cloudinary/angular-5.x';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-it',
@@ -19,21 +21,23 @@ import { Select } from '@ngxs/store';
 })
 export class PostItDialog implements OnInit {
   @Select(PostState.posts) postState$: Observable<Post[]>;
-
-  public postForm: FormGroup; 
-  public ratings = Rating;    
+  public selectedFile: File = null;
+  public selectedFileFormData = new FormData();
+  public postForm: FormGroup;
+  public ratings = Rating;
   private editMode: boolean = false;
   private posts: Post[];
-  private postID: number;  
-  
+  private postID: number;
+
   constructor(
-    public dialogRef: MatDialogRef<PostItDialog>,    
-    @Inject(MAT_DIALOG_DATA) public data: PostItDialogData,    
+    public dialogRef: MatDialogRef<PostItDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: PostItDialogData,
     private postsFacade: PostsFacadeService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private route: ActivatedRoute    ) { 
-    }
+    private route: ActivatedRoute,
+    private http: HttpClient) {
+  }
 
   ngOnInit() {
     this.route.firstChild
@@ -55,11 +59,11 @@ export class PostItDialog implements OnInit {
     this.initForm();
   }
 
-  onSubmit(){    
+  onSubmit() {
     this.dialogRef.close();
-    console.log("Inside of onSubmit new post",this.postForm);         
-    if(this.editMode){
-      const post = this.posts.find(p => p.postID == this.postID);  
+    console.log("Inside of onSubmit new post", this.postForm);
+    if (this.editMode) {
+      const post = this.posts.find(p => p.postID == this.postID);
       const updatedPost: Post = {
         userID: post.userID,
         postID: post.postID,
@@ -68,37 +72,81 @@ export class PostItDialog implements OnInit {
         rating: this.postForm.value.rating,
         movieID: 1,
         movie: {
-          movieID: 1, 
+          movieID: 1,
           title: post.movie.title
         }
       }
       this.postsFacade.updatePost(updatedPost);
-    }    
-    else{
-      this.postsFacade.createPost(this.postForm, this.authService.currentUserID);
-    } 
+    }
+    else {      
+      const formObj = {
+        title: this.postForm.value.postTitle,
+        description: this.postForm.value.description,
+        rating: this.postForm.value.rating,
+        movie: {
+          title: this.postForm.value.movieTitle
+        },
+        UserID: this.authService.currentUserID
+      }
+      this.selectedFileFormData.append("postForm", JSON.stringify(formObj));
+      this.selectedFileFormData.append("userID", JSON.stringify(this.authService.currentUserID));
+      // const headers = {
+      //   headers: new HttpHeaders({
+      //     'X-Requested-With': 'XMLHttpRequest'
+
+      //   })
+      // }
+      // this.http.post('api/v1/posts/upload', this.selectedFileFormData)
+      // .subscribe(
+      //     res => {
+      //       console.log(res)
+      //     }
+      //   )
+      this.postsFacade.createPost(this.selectedFileFormData);
+    }
   }
 
-  onNoClick(): void{    
-    this.dialogRef.close();    
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
-  private initForm(){
+  onFileSelected(event) {
+    console.log(event);
+    const headers = {
+      headers: new HttpHeaders({
+        'X-Requested-With': 'XMLHttpRequest'
+
+      })
+    }
+    const selectedFile = <File>event.target.files[0];
+    this.selectedFileFormData.append('movies-place-image', selectedFile, selectedFile.name);
+    const fd = new FormData();
+    // fd.append('movies-place-image', selectedFile, selectedFile.name)
+
+    // this.http.post('api/v1/posts/upload', fd, headers)
+    // .subscribe(
+    //   res => {
+    //     console.log(res)
+    //   }
+    // )
+  }
+
+  private initForm() {
     let postTitle = '';
     let description = '';
     let movieTitle = '';
     let rating = null;
-    
-    if(this.editMode){
+
+    if (this.editMode) {
       const post: Post = this.posts.find(p => p.postID == this.postID);
       postTitle = post.title;
       description = post.description;
       movieTitle = post.movie.title;
       rating = post.rating;
     }
-    this.postForm = this.fb.group({      
-      postTitle: this.fb.control(postTitle, [Validators.required, Validators.maxLength(100), Validators.minLength(4)]),        
-      description: this.fb.control(description, Validators.required),      
+    this.postForm = this.fb.group({
+      postTitle: this.fb.control(postTitle, [Validators.required, Validators.maxLength(100), Validators.minLength(4)]),
+      description: this.fb.control(description, Validators.required),
       movieTitle: this.fb.control(movieTitle, [Validators.required, Validators.maxLength(50), Validators.minLength(3)]),
       rating: this.fb.control(rating, [Validators.required])
     })

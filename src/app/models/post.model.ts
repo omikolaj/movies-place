@@ -12,6 +12,8 @@ export interface Post
   movieID: number,
   movie: Movie,
   rating: Rating,
+  moviePictureURL?: string,
+  moviePictureID?: string
 }
 
 export enum Rating {

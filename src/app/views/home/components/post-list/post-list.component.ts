@@ -9,13 +9,15 @@ import { Rating } from 'src/app/models/post.model';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent implements OnInit {    
+export class PostListComponent implements OnInit { 
+  defaultImgSrc: string = "../../../../../../../assets/images/movie_img_placeholder.jpg"   
   constructor(
     public postsFacade: PostsFacadeService,
     public moviesFacade: MoviesFacadeService,
     ) { }
 
   ngOnInit() {
-
   }
+
+  
 }

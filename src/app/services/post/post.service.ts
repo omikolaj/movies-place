@@ -15,15 +15,30 @@ export class PostService {
   public fetchPosts(): Observable<Post[]> {
     return this.http.get<Post[]>('api/v1/posts')  }
 
-  public createNewPost(post: Post): Observable<Post>{
+  // public createNewPost(post: Post): Observable<Post>{
+  //   console.log(post);
+  //   const headers = {
+  //     headers: new HttpHeaders({
+  //       // 'Content-Type': 'application/json'    
+  //       'X-Requested-With': 'XMLHttpRequest'
+  //     })
+  //   }
+  //   return this.http.post<Post>('api/v1/posts', post, headers).pipe(
+  //     shareReplay()
+  //   )
+  //     //This will not re-trigger the request if there are multiple subscribers
+      
+  // }
+
+  public createNewPost(post: FormData): Observable<Post>{
     console.log(post);
     const headers = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'    
+        // 'Content-Type': 'application/json'    
+        'X-Requested-With': 'XMLHttpRequest'
       })
     }
-
-    return this.http.post<Post>('api/v1/posts', JSON.stringify(post), headers).pipe(
+    return this.http.post<Post>('api/v1/posts', post, headers).pipe(
       shareReplay()
     )
       //This will not re-trigger the request if there are multiple subscribers

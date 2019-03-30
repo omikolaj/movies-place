@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostsFacadeService } from 'src/app/facades/posts-facade/posts-facade.service';
+import { MoviesFacadeService } from 'src/app/facades/movies-facade/movies-facade.service';
 
 @Component({
   selector: 'app-post-item',
@@ -12,12 +13,12 @@ import { PostsFacadeService } from 'src/app/facades/posts-facade/posts-facade.se
 })
 export class PostItemComponent implements OnInit {
   @Input() public post: Post;
-  @Input() public index: number;   
+  @Input() public index: number;     
   rating: string;
   constructor(private authService: AuthService, public dialog: MatDialog,
-    private router: Router, private route: ActivatedRoute, private postFacadeService: PostsFacadeService) { }
+    private router: Router, private route: ActivatedRoute, private postFacadeService: PostsFacadeService, private moviesFacade: MoviesFacadeService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.rating = Rating[this.post.rating];      
   }
 
@@ -37,4 +38,6 @@ export class PostItemComponent implements OnInit {
   onPostDelete(){
     this.postFacadeService.deletePost(this.post.postID);
   }
+
+  
 }

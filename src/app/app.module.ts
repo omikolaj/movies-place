@@ -20,9 +20,10 @@ import { PostItDialogModule } from './components/post-it-dialog/post-it-dialog.m
 import { AppRoutingModule } from './app-routing.module';
 import { UserState } from './store/state/user.state';
 import { AuthState } from './store/state/auth.state';
-import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor.service';
 import { AuthGuardService } from './services/auth/auth-guard/auth-guard.';
 import { PostItDialogContainerComponent } from './components/post-it-dialog-container/post-it-dialog-container.component';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import * as Cloudinary from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { PostItDialogContainerComponent } from './components/post-it-dialog-cont
       MovieState,
       UserState,
       AuthState
-    ]),
+    ]),    
     NgxsReduxDevtoolsPluginModule.forRoot({name: "store"}),
     NgxsLoggerPluginModule.forRoot(),
     HttpClientModule,

@@ -30,20 +30,26 @@ export class PostsFacadeService {
     return this.store.dispatch(new actionTypes.FetchPosts());
   }
 
-  public createPost(post: FormGroup, userId: string): Observable<any>{
-    console.log("Dispatching CreatePost from PostsFacadeService");
-    const newPost: Post = {     
-      userID: userId,
-      title: post.value.postTitle,
-      description: post.value.description,
-      rating: post.value.rating,
-      movieID: 1,
-      movie: {
-        movieID: 1,
-        title: post.value.movieTitle,        
-      }
-    }
-    return this.store.dispatch(new actionTypes.CreatePost(newPost));
+  // public createPost(post: FormGroup, userId: string): Observable<any>{
+  //   console.log("Dispatching CreatePost from PostsFacadeService");
+  //   const newPost: Post = {     
+  //     userID: userId,
+  //     title: post.value.postTitle,
+  //     description: post.value.description,
+  //     rating: post.value.rating,
+  //     movieID: 1,
+  //     movie: {
+  //       movieID: 1,
+  //       title: post.value.movieTitle,        
+  //     }
+  //   }
+  //   return this.store.dispatch(new actionTypes.CreatePost(newPost));
+    
+  // }
+
+    public createPost(post: FormData): Observable<any>{
+    console.log("Dispatching CreatePost from PostsFacadeService");    
+    return this.store.dispatch(new actionTypes.CreatePost(post));
     
   }
 

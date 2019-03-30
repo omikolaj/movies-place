@@ -1,9 +1,14 @@
 import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 
+// export class CreatePost {
+//     static readonly type = '[POST] CreatePost';
+//     constructor(public payload: Post) { }
+// }
+
 export class CreatePost {
-    static readonly type = '[POST] CreatePost';
-    constructor(public payload: Post) { }
+  static readonly type = '[POST] CreatePost';
+  constructor(public payload: FormData) { }
 }
 
 export class CreatePostSuccess{

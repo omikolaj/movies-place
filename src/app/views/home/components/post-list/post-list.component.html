@@ -4,8 +4,10 @@
         *ngFor="let post of postsFacade.posts$ | async; index as i" 
         [post]="post"
         [index]="i">        
-        <img [routerLink]="['movies', i]" class="movie-card-image" src="../../../../../../../assets/images/movie_img_placeholder.jpg" alt="Movie Placeholder Image"
-        (click)="moviesFacade.fetchMovieDetails(i);">
+        <img [routerLink]="['movies', i]" class="movie-card-image" 
+          [src]="post.moviePictureURL != null ? post.moviePictureURL : defaultImgSrc" 
+          alt="Movie Placeholder Image"
+          (click)="moviesFacade.fetchMovieDetails(i);">
     </app-post-item>           
 </section>
 
