@@ -7,13 +7,11 @@ import { RouterModule } from '@angular/router';
 import { LoaderModule } from 'src/app/components/loader/loader.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RequestHandlerComponent } from 'src/app/shared/request-handler/request-handler.component';
-import { PostItemEditComponent } from 'src/app/views/home/components/post-list/post-item-edit/post-item-edit.component';
 
 @NgModule({
   declarations: [
     PostListComponent,
     PostItemComponent,
-    PostItemEditComponent
   ],
   imports: [
     CommonModule,

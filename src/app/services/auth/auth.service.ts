@@ -81,6 +81,7 @@ export class AuthService {
           console.log("Logout response:", res);
           localStorage.removeItem('expires_at');
           localStorage.removeItem('sub');
+          localStorage.removeItem('selectedTab');
         }
       ),
       shareReplay()

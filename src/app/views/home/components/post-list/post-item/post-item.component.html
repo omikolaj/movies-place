@@ -18,11 +18,12 @@
     <div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.description }}</p>
+        <p>{{ likes }}</p>
     </div>      
   </mat-card-content>
   <mat-card-actions>
     <div class="article-buttons">
-      <button mat-button>LIKE</button>
+      <button mat-button (click)="onLikeClick()">LIKE</button>
       <button mat-button *ngIf="checkUser()" (click)="onPostEdit()">EDIT</button>
       <button mat-button *ngIf="checkUser()" (click)="onPostDelete()">DELETE</button>
     </div>    

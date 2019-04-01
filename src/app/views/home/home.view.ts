@@ -38,6 +38,13 @@ export class HomeView implements OnInit {
     if(this.posts.length == 0){
       this.postsFacade.loadPosts();
     }
+
+    this.actions$.pipe(ofActionDispatched(actions.RefreshTokenSuccess))
+      .subscribe(
+        () => {
+          return this.router.navigate(['posts']);
+        }
+      )
   }
 
   ngOnDestroy(){

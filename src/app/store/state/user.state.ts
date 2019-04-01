@@ -5,9 +5,10 @@ import * as actions from '../actions/user.actions';
 import { mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SessionService } from 'src/app/services/session/session.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 export interface UserStateModel{
-  users: User[],
+  userLikesMappedToPost: [{}],
   request: {
     loading: boolean,
     error: RequestError
@@ -17,7 +18,7 @@ export interface UserStateModel{
 @State<UserStateModel>({
   name: 'user',
     defaults: {
-      users: [],
+      userLikesMappedToPost: [{}],
       request: {
         loading: false,
         error: null
@@ -26,11 +27,13 @@ export interface UserStateModel{
 })
 
 export class UserState{
-  constructor(private sessionService: SessionService) { }
+  constructor(private authService: AuthService) { }
 
   @Selector()
   static users(state: UserStateModel){
-    return state.users;
+    return state.userLikesMappedToPost;
   }
+  
+  
 }
 

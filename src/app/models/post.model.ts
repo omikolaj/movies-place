@@ -14,6 +14,7 @@ export interface Post
   rating: Rating,
   moviePictureURL?: string,
   moviePictureID?: string
+  likes: number
 }
 
 export enum Rating {

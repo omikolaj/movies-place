@@ -15,21 +15,6 @@ export class PostService {
   public fetchPosts(): Observable<Post[]> {
     return this.http.get<Post[]>('api/v1/posts')  }
 
-  // public createNewPost(post: Post): Observable<Post>{
-  //   console.log(post);
-  //   const headers = {
-  //     headers: new HttpHeaders({
-  //       // 'Content-Type': 'application/json'    
-  //       'X-Requested-With': 'XMLHttpRequest'
-  //     })
-  //   }
-  //   return this.http.post<Post>('api/v1/posts', post, headers).pipe(
-  //     shareReplay()
-  //   )
-  //     //This will not re-trigger the request if there are multiple subscribers
-      
-  // }
-
   public createNewPost(post: FormData): Observable<Post>{
     console.log(post);
     const headers = {
@@ -45,14 +30,24 @@ export class PostService {
       
   }
 
-  public updatePost(updatedPost: Post){
-    console.log("Inside of updatePost");
+  public addLike(postID: number): Observable<Post>{
+    console.log("Inside of add like in post service");
     const headers = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
-    return this.http.patch<Post>(`api/v1/posts/${updatedPost.postID}`, JSON.stringify(updatedPost), headers)
+    return this.http.patch<Post>(`api/v1/posts/like/${postID}`, {}, headers)
+  }
+
+  public updatePost(updatedPost: any){
+    console.log("Inside of updatePost");
+    const headers = {
+      headers: new HttpHeaders({
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return this.http.patch<Post>(`api/v1/posts/${updatedPost.postID}`, updatedPost.formData, headers)
   }
 
   public deletePost(postToDeleteID: number): Observable<number>{

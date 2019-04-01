@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector, createSelector } from '@ngxs/store';
 import { PostService } from 'src/app/services/post/post.service';
-import { switchMap, catchError, mergeMap } from 'rxjs/operators';
+import { switchMap, catchError, mergeMap, merge } from 'rxjs/operators';
 import { Post } from 'src/app/models/post.model';
 import { RequestError } from 'src/app/models/requesterror.model';
 import * as actions from '../actions/post.actions';
@@ -292,4 +292,32 @@ export class PostState{
         })
       }
 
+    @Action(actions.AddLike)
+    addLike(ctx: StateContext<PostStateModel>, { payload }: actions.AddLike){      
+      return this.postService.addLike(payload).pipe(
+        mergeMap(
+          (addLikeRequest) => {
+            return ctx.dispatch(new actions.AddLikeSuccess(addLikeRequest))
+          }
+        ),        
+      )
+      .subscribe(
+        (req) => console.log("HTTP LIKE REQUEST STARTED", req)
+      ),
+      (err) => console.log("There was an error liking this post, error: ", err),
+      () => console.log("HTTP REQUEST COMPLETED")
+    }
+
+    @Action(actions.AddLikeSuccess)
+    addLikeSuccess(ctx: StateContext<PostStateModel>, { payload }: actions.AddLikeSuccess){
+      const state = ctx.getState();
+      ctx.patchState({
+        ...state,
+        posts: state.posts.map(p => p.postID === payload.postID ? payload : p),
+        request:{
+          loading: false,
+          error: null
+        }        
+      })      
+    }
 }

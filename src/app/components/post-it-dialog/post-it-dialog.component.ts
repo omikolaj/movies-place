@@ -64,25 +64,33 @@ export class PostItDialog implements OnInit {
     console.log("Inside of onSubmit new post", this.postForm);
     if (this.editMode) {
       const post = this.posts.find(p => p.postID == this.postID);
-      const updatedPost: Post = {
+      const formObjEdit = {
         userID: post.userID,
         postID: post.postID,
-        description: this.postForm.value.description,
         title: this.postForm.value.postTitle,
+        description: this.postForm.value.description,
         rating: this.postForm.value.rating,
-        movieID: 1,
+        moviePictureURL: post.moviePictureURL,
+        moviePictureID: post.moviePictureID,
+        movieID: post.movie.movieID,
         movie: {
-          movieID: 1,
-          title: post.movie.title
+          title: this.postForm.value.movieTitle,
+          movieID: post.movie.movieID
         }
       }
-      this.postsFacade.updatePost(updatedPost);
+      this.selectedFileFormData.append("postForm", JSON.stringify(formObjEdit));      
+
+      const editPostDTO = {
+        postID: this.postID,
+        formData: this.selectedFileFormData
+      }
+      this.postsFacade.updatePost(editPostDTO);
     }
     else {      
       const formObj = {
         title: this.postForm.value.postTitle,
         description: this.postForm.value.description,
-        rating: this.postForm.value.rating,
+        rating: this.postForm.value.rating,        
         movie: {
           title: this.postForm.value.movieTitle
         },
@@ -90,18 +98,6 @@ export class PostItDialog implements OnInit {
       }
       this.selectedFileFormData.append("postForm", JSON.stringify(formObj));
       this.selectedFileFormData.append("userID", JSON.stringify(this.authService.currentUserID));
-      // const headers = {
-      //   headers: new HttpHeaders({
-      //     'X-Requested-With': 'XMLHttpRequest'
-
-      //   })
-      // }
-      // this.http.post('api/v1/posts/upload', this.selectedFileFormData)
-      // .subscribe(
-      //     res => {
-      //       console.log(res)
-      //     }
-      //   )
       this.postsFacade.createPost(this.selectedFileFormData);
     }
   }
@@ -120,7 +116,7 @@ export class PostItDialog implements OnInit {
     }
     const selectedFile = <File>event.target.files[0];
     this.selectedFileFormData.append('movies-place-image', selectedFile, selectedFile.name);
-    const fd = new FormData();
+    //const fd = new FormData();
     // fd.append('movies-place-image', selectedFile, selectedFile.name)
 
     // this.http.post('api/v1/posts/upload', fd, headers)

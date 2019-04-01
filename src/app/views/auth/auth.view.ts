@@ -118,7 +118,6 @@ export class AuthView implements OnInit {
           return this.openSnackBar("You must be authorized", "Dismiss");
         }
       );      
-
   }
 
   ngOnInit() {

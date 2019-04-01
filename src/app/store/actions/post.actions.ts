@@ -48,7 +48,7 @@ export class FetchPost{
 
 export class UpdatePost{
   static readonly type ='[POST] UpdatePost';
-  constructor(public payload: Post) { }
+  constructor(public payload: any) { }
 }
 
 export class UpdatePostSuccess{
@@ -75,4 +75,20 @@ export class DeletePostFail{
   static readonly type = '[POST] DeletePostFail';
   constructor(public payload: RequestError) { };
 }
+
+export class AddLike{
+  static readonly type = '[POST] AddLike';
+  constructor(public payload: number) { };
+}
+
+export class AddLikeSuccess{
+  static readonly type = '[POST] AddLikeSuccess';
+  constructor(public payload: Post) { };
+}
+
+export class AddLikeFail{
+  static readonly type = '[POST] AddLikeFail';
+  constructor(public error: RequestError) { };
+}
+
 

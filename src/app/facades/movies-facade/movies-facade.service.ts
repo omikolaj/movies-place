@@ -11,9 +11,9 @@ export class MoviesFacadeService {
   
   constructor(private store: Store) { }
 
-  public fetchMovieDetails(id: number){
-    console.log(`Dispatching fetchMovieDetails from MovieFacadeService with ID: ${id}`);
-    this.store.dispatch(new actionTypes.FetchMovieDetails(id));
-  }
+  // public fetchMovieDetails(id: number){
+  //   console.log(`Dispatching fetchMovieDetails from MovieFacadeService with ID: ${id}`);
+  //   this.store.dispatch(new actionTypes.FetchMovieDetails(id));
+  // }
 
 }

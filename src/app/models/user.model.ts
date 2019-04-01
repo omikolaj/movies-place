@@ -9,5 +9,6 @@ export interface User
   password: string,
   comments?: Comment[],
   posts?: Post[],
-  favorites?: Favorite[]
+  favorites?: Favorite[],
+  userLikesMappedToPost?: [{}],
 }
